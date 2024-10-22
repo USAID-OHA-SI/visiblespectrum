@@ -1,0 +1,264 @@
+---
+title: "visiblespectrum Parameter Inputs"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(dplyr)
+library(kableExtra)
+library(shiny)
+library(gt)
+library(flextable)
+library(officer)
+library(glitr)
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+```{r echo=FALSE}
+load("output.RData")
+load("ui_scrape.RData")
+```
+
+```{r results='asis'}
+options_summary_df <- output$options_summary_df 
+
+options_summary_df <- options_summary_df %>%
+  mutate(
+    parameter = recode(
+      parameter,
+      "ui_country" = "Countries",
+      "ui_indicators" = "Indicators",
+      "ui_ages" = "Age Categories",
+      "ui_sexes" = "Sex Options",
+      "ui_periods" = "Periods"
+    )
+  )
+
+ui_scrape <- ui_scrape %>%
+  mutate(
+    ui_num_levels = ui_num_levels - 1 #area levels are 0 based, so go back 1
+  )
+
+parameters_by_country <- ui_scrape %>%
+  rename(
+    Country = ui_country,
+    Indicators = ui_indicators,
+    Ages = ui_ages,
+    Sex_Options = ui_sexes,
+    Periods = ui_periods,
+    Max_Level = ui_num_levels
+  ) %>%
+  group_by(Country) %>%
+  summarize(
+    Indicators = as.character(paste(unique(unlist(Indicators)), collapse = ", ")),
+    Ages = as.character(paste(unique(unlist(Ages)), collapse = ", ")),
+    Sex_Options = as.character(paste(unique(unlist(Sex_Options)), collapse = ", ")),
+    Periods = as.character(paste(unique(unlist(Periods)), collapse = ", ")),
+    Max_Level = max(Max_Level)
+  )
+```
+
+```{r}
+ui <- fluidPage(
+    tags$head(tags$style(HTML("
+    .shiny-input-container {
+      width: 300px;  /* Adjust width of input containers */
+      height: 200px;
+    }
+    .downloadButton {
+      width: 100%;  /* Make download buttons full width */
+    }
+  "))),
+  downloadButton("downloadParameters", "Download Parameters by Country"),
+  downloadButton("downloadAll", "Download All Parameters")
+)
+
+server <- function(input, output) {
+  
+  # Download handler for Parameters by Country
+  output$downloadParameters <- downloadHandler(
+    filename = function() {
+      paste("parameters_by_country", ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv(parameters_by_country, file, row.names = FALSE)
+    }
+  )
+
+  # Download handler for All Parameters
+  output$downloadAll <- downloadHandler(
+    filename = function() {
+      paste("all_parameters", ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv(options_summary_df, file, row.names = FALSE)
+    }
+  )
+}
+
+# Run the app
+shinyApp(ui = ui, server = server, options = list(height = 50))
+```
+
+
+### Input Parameters Summary
+
+```{r echo=FALSE}
+# Display the modified DataFrame
+kable(options_summary_df)%>%
+  kable_styling() %>%
+  column_spec(1, bold = TRUE)
+
+```
+<details><summary><strong>For which parameters do most countries have data?</strong>
+More than 90% of countries have data for these categories and are therefore referred to as <i>standard parameters</i>.</summary>
+```{r echo=FALSE}
+defaults_df <- output$defaults_df
+defaults_df <- defaults_df %>%
+    mutate(
+    parameter = recode(
+      parameter,
+      "ui_country" = "Countries",
+      "ui_indicators" = "Indicators",
+      "ui_ages" = "Age Categories",
+      "ui_sexes" = "Sex Options",
+      "ui_periods" = "Periods"
+    )
+  )
+
+kable(defaults_df)%>%
+  kable_styling() %>%
+  column_spec(1, bold = TRUE)
+
+```
+</details>
+<br><br>
+
+```{r}
+deviations_df <- output$deviations_df
+deviations_df <- deviations_df %>%
+    mutate(
+    parameter = recode(
+      parameter,
+      "ui_country" = "Countries",
+      "ui_indicators" = "Indicators",
+      "ui_ages" = "Age Categories",
+      "ui_sexes" = "Sex Options",
+      "ui_periods" = "Periods"
+    )
+  )
+```
+
+<details>
+<summary><strong>Which countries deviate from these standard set of input parameters?</strong> Some countries have different parameters options based on available data. <i> `r deviations_df$country` </i>have deviations from the standard set.</summary>
+
+```{r}
+kable(deviations_df)  %>%
+  kable_styling() %>%
+  column_spec(1, bold = TRUE)
+```
+</details>
+<br><br>
+```{r}
+country_period_df <- output$country_period_df
+column_names <- colnames(country_period_df)
+columns_with_x <- sapply(country_period_df, function(col) all(col == 'x'))
+```
+<details>
+<summary><strong>For which periods does each country have data?</strong> Periods vary by country ranging from `r column_names[2]` to `r column_names[length(column_names)]`. Every country has data for `r names(columns_with_x[columns_with_x])`. </summary>
+
+```{r}
+border_style <- fp_border(color = light_grey, width = 1, style = "solid")
+colormatrix <- ifelse(country_period_df[, -1] == "x", midnight_blue, "white")
+
+
+country_period_ft <- flextable(country_period_df) %>%
+  theme_vanilla() %>%
+  font(part = "all", fontname = "Source Sans Pro") %>%
+  border(border = border_style, part = "all") %>%
+  vline(j = 2:ncol(country_period_df), border = border_style) %>% 
+
+  bg(i = 1:nrow(country_period_df), j = 2:ncol(country_period_df), bg = colormatrix) %>%  
+  bg(i = 1:nrow(country_period_df), j = 1, bg = light_grey, part = "body") %>%
+
+  add_footer_lines("Countries marked with 'x' indicate participation in the respective periods.") %>%
+  bg(part = "header", bg = suva_grey) %>%
+  color(part = "header", color = nero) %>%
+  color(part = "body", color = nero) %>%
+  font(part = "header", fontname = "Source Sans Pro") %>%
+  bold(part = "header") %>%
+  bold(j = 1, part = "body") %>%
+  align(align = "left", part = "all") %>%
+  align(align = "left", part = "header") %>%
+  align(align = "left", j = 1, part = "body") %>%
+  align(align = "center", j = 2:ncol(country_period_df), part = "body") %>%
+  set_table_properties(
+    x = .,
+    opts_html = list(
+      scroll = list(
+        height = "900px",
+        freeze_first_column = TRUE
+      )
+    )
+  )
+country_period_ft
+
+```
+</details>
+<br><br>
+
+<details>
+<summary><strong>Find Parameters by Country</strong></summary>
+
+```{r}
+# Define the UI
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      width=3,
+      selectInput("selected_country", "Select a Country:",
+                  choices = unique(parameters_by_country$Country))
+    ),
+     mainPanel(
+      fluidRow(
+        width = 9,  # Set the width of the fluid row to 12
+        tableOutput("country_parameters")
+      )
+    )
+  )
+)
+
+# Define the server
+server <- function(input, output) {
+  output$country_parameters <- renderTable({
+    # Filter the parameters for the selected country
+    selected_data <- parameters_by_country %>%
+      filter(Country == input$selected_country) %>%
+      select(-Country)  # Remove the Country column
+    
+    # Return the filtered data
+    selected_data
+  })
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)
+
+```
+
+</details>
+<details>
+<summary><strong>View All Parameters by Country</strong></summary>
+```{r}
+# Create a gt table
+kable(parameters_by_country)%>%
+  kable_styling() %>%
+  column_spec(1, bold = TRUE)
+
+```
+</details>
+
+<br><br><br>
