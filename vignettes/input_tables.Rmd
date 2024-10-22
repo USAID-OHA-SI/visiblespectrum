@@ -1,7 +1,11 @@
 ---
 title: "visiblespectrum Parameter Inputs"
-output: html_document
+output: rmarkdown::html_vignette
 runtime: shiny
+vignette: >
+  %\VignetteIndexEntry{visiblespectrum Parameter Inputs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
