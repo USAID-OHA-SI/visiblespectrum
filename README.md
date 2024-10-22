@@ -1,5 +1,5 @@
-# visiblespectrum
-🟥 **v** 🟧 **i** 🟨 **s** 🟩 **i** 🟦 **b** 🟪 **l** 🟫 **e** 🌈 **spectrum**
+🌈 **visiblespectrum** 🌈
+
 
 
 
