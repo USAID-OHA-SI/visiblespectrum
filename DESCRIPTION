@@ -1,0 +1,21 @@
+Package: visiblespectrum
+Type: Package
+Title: Scrape NAOMI Spectrum Data from UNAIDS
+Version: 0.1.0
+Author: Allison Towey
+Maintainer: Allison Towey <atowey@usaid.gov>
+License: MIT
+Description: A package to scrape HIV sub-national estimates from UNAIDS NAOMI Spectrum.
+Encoding: UTF-8
+LazyData: true
+Imports:
+  dplyr,
+  glue,
+  purrr,
+  readr,
+  tidyr,
+  countrycode,
+  httr,
+  testthat,
+  progressr
+RoxygenNote: 7.3.2
