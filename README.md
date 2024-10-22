@@ -1,4 +1,6 @@
 # visiblespectrum
+<span style="font-size: 2em; font-weight: bold; background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">visiblespectrum</span>
+
 
 **A package to scrape the UNAIDS NAOMI Spectrum HIV sub-national estimates viewer.**
 
