@@ -1,0 +1,182 @@
+#' Helper Functions for the visiblespectrum Package
+#'
+#' This file contains various helper functions used in the visiblespectrum package
+#' for processing country parameters and creating API URLs.
+
+#' @import dplyr
+#' @import glue
+#' @import purrr
+#' @import readr
+#' @import tidyr
+#' @import countrycode
+#'
+#' @importFrom dplyr %>%
+#' @importFrom dplyr mutate
+
+
+#------------------- Helper Functions -------------------
+
+#' @title
+#' Log messages with timestamp
+#'
+#' @description
+#' This function logs messages to the console with a timestamp.
+#'
+#' @param message A character string to log.
+#' @export
+log_message <- function(message) {
+  cat("[LOG]", Sys.time(), message, "\n")
+}
+
+#' Convert age group codes to human-readable format
+#'
+#' @param age_range A character string representing the age group (e.g., "Y015_049").
+#' @return A character string representing the age range, or NA if the input
+#' format is invalid.
+#' @export
+age_range_to_code <- function(age_range) {
+  if (is.na(age_range)) {
+    return(NA)
+  }
+
+  if (age_range == "all ages") {
+    return("Y000_999")
+  }
+  if (age_range == "<1") {
+    return("Y000_000")
+  }
+
+  if (grepl("\\+", age_range)) {
+    start_age <- as.numeric(gsub("\\+", "", age_range))
+    return(paste0("Y", sprintf("%03d", start_age), "_999"))
+  }
+
+  age_parts <- unlist(strsplit(age_range, "-"))
+  start_age <- as.numeric(age_parts[1])
+  end_age <- as.numeric(age_parts[2])
+
+  start_code <- sprintf("%03d", start_age)
+  end_code <- sprintf("%03d", end_age)
+
+  return(paste0("Y", start_code, "_", end_code))
+}
+
+#' Convert country names to ISO country codes
+#'
+#' @param country_name A character string representing the country name (e.g.,
+#' "United States").
+#' @return A character string representing the ISO country code, or NA if the
+#' country name is not found.
+#' @export
+country_name_to_iso <- function(country_name) {
+  iso_codes <- ifelse(country_name == "Eswatini",
+                      "ESW", # Eswatini is ESW in database, not SWZ as in ISO3C
+                      countrycode(country_name, origin = "country.name",
+                                  destination = "iso3c"))
+
+  # Handle cases where countrycode might return NA
+  if (any(is.na(iso_codes))) {
+    warning(paste("Unrecognized country names:",
+                  paste(country_name[is.na(iso_codes)], collapse = ", ")))
+  }
+
+  return(iso_codes)
+}
+#' Convert date string to "YYYY-Q" format
+#'
+#' @param date_string A character string representing the date (e.g., "January
+#' 2024").
+#' @return A character string formatted as "YYYY-Q".
+#' @export
+convert_date_to_quarter_YYYY_Q <- function(date_string) {
+  date_parsed <- as.Date(paste("01", date_string), format = "%d %B %Y")
+  year <- format(date_parsed, "%Y")
+  month <- as.numeric(format(date_parsed, "%m"))
+
+  quarter <- case_when(
+    month %in% 1:3 ~ 1,  # January, February, March -> Q1
+    month %in% 4:6 ~ 2,  # April, May, June -> Q2
+    month %in% 7:9 ~ 3,  # July, August, September -> Q3
+    month %in% 10:12 ~ 4, # October, November, December -> Q4
+    TRUE ~ NA_real_      # In case of an invalid month
+  )
+
+  return(paste(year, quarter, sep = "-"))
+}
+
+#------------------- Main Processing Function -------------------
+
+#' Process Country Parameters for API Calls
+#'
+#' Loads country parameter data and indicator data, processes them, and returns
+#' a data frame containing processed parameters with corresponding codes.
+#'
+#' @param countries A character vector of country names.
+#' @param indicators A character vector of indicator names.
+#' @param age_groups A character vector of age group strings.
+#' @param sex_options A character vector of sex options.
+#' @param periods A character vector of period strings.
+#' @return A data frame containing processed country parameters with ISO codes,
+#' age codes, sex options, and date periods.
+#' @export
+process_country_parameters <- function(countries, indicators, age_groups,
+                                       sex_options, periods) {
+  # Load indicators_df to convert indicators to indicator codes
+  load("~/visiblespectrum/data/indicators_df.RData")
+
+  country_param_dt <- expand.grid(
+    age_groups = age_groups,
+    sex_options = sex_options,
+    indicators = indicators,
+    periods = periods,
+    country = countries,
+    stringsAsFactors = FALSE
+  )
+
+  processed_country_param_dt <- country_param_dt %>%
+    left_join(indicators_df, by = c("indicators" = "indicator_name")) %>%
+    mutate(
+      code_indicator = indicator_code,
+      code_iso = country_name_to_iso(country),
+      code_age = map(age_groups, age_range_to_code) %>%
+        map(~ .x[!is.na(.x)]),
+      code_sex = tolower(sex_options),
+      code_period = map(periods, convert_date_to_quarter_YYYY_Q) %>%
+        map(~ .x[!is.na(.x)])
+    ) %>%
+    select(-indicator_code)
+
+  return(processed_country_param_dt)
+}
+
+#' Create API URLs from parameter combinations
+#'
+#' This function constructs URLs for API calls based on country parameter
+#' combinations.
+#'
+#' @param processed_country_param_dt A data frame containing parameter
+#' combinations with code columns.
+#' @param max_level A character or integer representing the user-specified area
+#' level.
+#' @return A data frame with constructed URLs.
+#' @export
+create_urls <- function(processed_country_param_dt, max_level) {
+  load("~/visiblespectrum/data/country_max_levels.RData")
+
+  BASE_URL <- "https://naomiviewerserver.azurewebsites.net/api/v1/data?"
+
+  processed_country_param_dt <- processed_country_param_dt %>%
+    left_join(country_max_levels_df, by = c("country" = "country_name")) %>%
+    mutate(
+      level = case_when(
+        # If user input is "none", set level from country_max_levels
+        max_level == "none" ~ max_level_value,
+        # Otherwise, take min of max_level and max country value
+        TRUE ~ suppressWarnings(pmin(as.numeric(max_level), max_level_value,
+                                     na.rm = TRUE))
+      ),
+      url = glue("{BASE_URL}country={URLencode(code_iso)}&indicator={URLencode(code_indicator)}&ageGroup={URLencode(code_age)}&period={URLencode(code_period)}&sex={URLencode(code_sex)}&areaLevel={level}")
+    )
+
+  return(processed_country_param_dt)
+}
