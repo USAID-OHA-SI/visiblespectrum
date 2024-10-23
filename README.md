@@ -80,21 +80,30 @@ pull_naomi(
 ---
 
 ### In Development
+
+#### Higher Priority
+- Add download as a CSV functionality to `pull_naomi`
+- Explain what the all/standard input params are
+- Add rerun functionality for fails
+- Dig into periods issue and handle Mozambique (see notes)
 - Improve error handling for expected data gaps, such as:
   - **Namibia**: Missing PEDS (0-14) data.
   - Some countries missing data for **`ANC tested negative`** and **`ANC tested positive`**.
 - Automatically select and use the most recent available period for all countries.
 - Introduce more robust testing procedures.
-- Draft more detailed vignettes.
+
+#### Lower Priority
+- Add all periods functionality to `pull_naomi`
 - Fix issues with the **progress bar** not showing up when using package (but functioning when running in RStudio as a script).
 - Resolve Shiny-related issues in the `Input Tables` vignette (Shiny not functioning as a vignette).
 - Address the warning message regarding **`httr`** and **`progressr`** upon loading.
+
+#### Need More Information
 - Create a standard set of input indicators that would be most useful (there are 27 indicators at present and under the default, they are all being run)
-- Add download as a CSV functionality to `pull_naomi`
-- Add all periods functionality to `pull_naomi`
-- Explain what the all/standard input params are
-- Add rerun functionality for fails
-- Dig into periods issue and handle Mozambique (see notes)
+  - What should this standard set be?
+- Draft more detailed vignettes.
+  - What should it/they look like?
+
 
 ### Notes
 - **Eswatini** is listed as **`ESW`** in the dataset. The ISO code expected by `countrycode` is **`SWZ`**.
