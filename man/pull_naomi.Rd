@@ -11,7 +11,9 @@ pull_naomi(
   sex_options = "all",
   periods = "recent",
   max_level = "none",
-  verbose = FALSE
+  verbose = FALSE,
+  csv = FALSE,
+  wait = 0
 )
 }
 \arguments{

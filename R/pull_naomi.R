@@ -30,7 +30,7 @@
 pull_naomi <- function(countries="all", indicators="all",
                              age_groups="standard", sex_options="all",
                              periods="recent", max_level="none",
-                             verbose=FALSE) {
+                             verbose=FALSE, csv=FALSE, wait=0) {
 
   load("~/Github/NAOMI-scrapR/To Use/all_countries.RData")
   load("~/Github/NAOMI-scrapR/To Use/all_indicators.RData")
@@ -162,6 +162,10 @@ pull_naomi <- function(countries="all", indicators="all",
           fail_list[[i]] <- fail_record
           next
         }
+      # Sleep if wait is specified
+      if (wait > 0) {
+        Sys.sleep(wait)
+      }
     }
   })
 
@@ -190,10 +194,18 @@ pull_naomi <- function(countries="all", indicators="all",
   log_message(paste("Failed requests:", fail_count))
 
   if (fail_count== 0) {
+    if (csv) {
+      write_csv(combined_results, "naomi_results.csv")
+      log_message("Results downloaded to current directory as naomi_results.csv")
+    }
     return(combined_results)
   } else {
     failed_requests_df <- bind_rows(fail_list)
     cat("Failures in query. To see successful results: $success_data. To see failures, view $fail_data")
+    if (csv) {
+      write_csv(combined_results, "naomi_results.csv")
+      log_message("Successful results downloaded to current directory as naomi_results.csv")
+    }
     return(list(success_data = combined_results, fail_data = failed_requests_df))
   }
 
