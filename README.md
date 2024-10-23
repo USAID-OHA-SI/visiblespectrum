@@ -5,6 +5,16 @@
 
 **A package to scrape the UNAIDS NAOMI Spectrum HIV sub-national estimates viewer.**
 
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Parameters](#parameters)
+5. [In Development](#in-development)
+6. [Notes](#notes)
+7. [License](#license)
+
 ## Overview
 
 The `visiblespectrum` package is currently in development and aims to provide users with easy access to HIV sub-national estimates from the [UNAIDS NAOMI Spectrum tool](https://naomi-spectrum.unaids.org/). The primary function for pulling data is `pull_naomi`, which allows users to specify various parameters to customize their queries.
