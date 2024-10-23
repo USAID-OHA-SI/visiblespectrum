@@ -44,6 +44,9 @@ pull_naomi(
 - **max_level**: An integer representing the maximum area level to retrieve data for.
 - **verbose**: A logical value that controls whether progress messages are printed during data retrieval.
 
+
+---
+
 ### In Development:
 - Improve error handling for expected data gaps, such as:
   - **Namibia**: Missing pediatric (PEDS) data.
