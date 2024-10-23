@@ -39,6 +39,11 @@ pull_naomi <- function(countries="all", indicators="all",
   validate_inputs(countries, indicators, age_groups, sex_options, periods, max_level, verbose)
 
   countries <- handle_default_input(countries, "all", unlist(all_countries))
+  if (length(countries) == 1 && countries == "dreams") {
+    countries <- c("Botswana", "Cote D'ivoire", "Haiti", "Kenya", "Lesotho",
+                   "Malawi", "Mozambique", "Namibia", "Rwanda", "South Africa",
+                   "South Sudan", "Tanzania", "Uganda", "Zambia", "Zimbabwe")
+  }
   indicators <- handle_default_input(indicators, "all", unlist(all_indicators))
   age_groups <- handle_default_input(age_groups, "standard",
                                      c("<1", "1-4", "5-9", "10-14", "15-19", "20-24", "25-29",
