@@ -34,8 +34,6 @@ pull_naomi(
   verbose = FALSE,     # Logical indicating whether to print progress messages
   csv = FALSE,         # Logical indicating whether to save results as a CSV
   wait = 0             # Optional float parameter to specify a delay (in seconds) between API requests. 
-                       # Set a positive value to scrape more slowly, which can help reduce errors 
-                       # if too many requests are sent in a short period.
 )
 ```
 #### Example Queries
