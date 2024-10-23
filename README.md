@@ -47,7 +47,7 @@ pull_naomi(
 
 ---
 
-### In Development:
+### In Development
 - Improve error handling for expected data gaps, such as:
   - **Namibia**: Missing pediatric (PEDS) data.
   - Some countries missing data for **ANC tested negative** and **ANC tested positive**.
@@ -60,7 +60,7 @@ pull_naomi(
 - Address the warning message regarding **httr** and **progressr** upon loading.
 - Create a standard set of input indicators that would be most useful (there are 27 indicators at present and under the default, they are all being run)
 
-### Notes:
+### Notes
 - **Eswatini** is listed as **ESW** in the dataset. The ISO code expected by `countrycode` is **SWZ**.
 - **Namibia** does not have data for the 0-14 age group, which will result in failures when attempting to retrieve it.
 - Several countries do not have data for ANC Positive/ANC Negative even though in the NAOMI UI they are dropdown options.
