@@ -141,7 +141,7 @@ View(hiv_prev_country_level_query)
 - **Namibia** does not have data for the `0-14` age group, which will result in failures when attempting to retrieve it.
 - Several countries do not have data for `ANC Positive`/`ANC Negative` even though in the NAOMI UI they are dropdown options.
 - Area levels are 0-based, meaning level 0 represents the country level. When specifying a max level depth, the data will include levels from 0 up to the selected max. For example, setting `max_level = 2` will return data for levels 0 (country), 1, and 2.
-- Every country has data for period December 2023, which is why it was used for development. All countries have a dropdown option (may not include all data) for September 2024 (Q3) except for Mozambique, which has the option for December 2024 (Q4). It appears in future years as well Mozambique is one quarter later than all other countries.
+- Every country has data for period `December 2023`, which is why it was used for development. All countries have a dropdown option (may not include all data) for `September 2024` (Q3) except for Mozambique, which has the option for `December 2024` (Q4). It appears in future years as well Mozambique is one quarter later than all other countries.
 - `pull_naomi` and `validate_parameters` are the external methods
 
 
