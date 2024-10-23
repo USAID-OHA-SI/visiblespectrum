@@ -23,7 +23,6 @@
 #' This function logs messages to the console with a timestamp.
 #'
 #' @param message A character string to log.
-#' @export
 log_message <- function(message) {
   cat("[LOG]", Sys.time(), message, "\n")
 }
@@ -33,7 +32,6 @@ log_message <- function(message) {
 #' @param age_range A character string representing the age group (e.g., "Y015_049").
 #' @return A character string representing the age range, or NA if the input
 #' format is invalid.
-#' @export
 age_range_to_code <- function(age_range) {
   if (is.na(age_range)) {
     return(NA)
@@ -67,39 +65,40 @@ age_range_to_code <- function(age_range) {
 #' "United States").
 #' @return A character string representing the ISO country code, or NA if the
 #' country name is not found.
-#' @export
 country_name_to_iso <- function(country_name) {
-  iso_codes <- ifelse(country_name == "Eswatini",
-                      "ESW", # Eswatini is ESW in database, not SWZ as in ISO3C
-                      countrycode(country_name, origin = "country.name",
-                                  destination = "iso3c"))
+  iso_codes <- ifelse(
+    country_name == "Eswatini", "ESW", # Eswatini is ESW in database, not SWZ as in ISO3C
+    countrycode(country_name, origin = "country.name",
+                destination = "iso3c")
+  )
 
   # Handle cases where countrycode might return NA
   if (any(is.na(iso_codes))) {
-    warning(paste("Unrecognized country names:",
-                  paste(country_name[is.na(iso_codes)], collapse = ", ")))
+    warning(paste(
+      "Unrecognized country names:",
+      paste(country_name[is.na(iso_codes)], collapse = ", ")
+    ))
   }
 
   return(iso_codes)
 }
+
 #' Convert date string to "YYYY-Q" format
 #'
 #' @param date_string A character string representing the date (e.g., "January
 #' 2024").
 #' @return A character string formatted as "YYYY-Q".
-#' @export
 convert_date_to_quarter_YYYY_Q <- function(date_string) {
-  date_parsed <- as.Date(paste("01", date_string), format = "%d %B %Y")
+  date_parsed <-
+    as.Date(paste("01", date_string), format = "%d %B %Y")
   year <- format(date_parsed, "%Y")
   month <- as.numeric(format(date_parsed, "%m"))
 
-  quarter <- case_when(
-    month %in% 1:3 ~ 1,  # January, February, March -> Q1
-    month %in% 4:6 ~ 2,  # April, May, June -> Q2
-    month %in% 7:9 ~ 3,  # July, August, September -> Q3
-    month %in% 10:12 ~ 4, # October, November, December -> Q4
-    TRUE ~ NA_real_      # In case of an invalid month
-  )
+  quarter <- case_when(month %in% 1:3 ~ 1, # January, February, March -> Q1
+                       month %in% 4:6 ~ 2, # April, May, June -> Q2
+                       month %in% 7:9 ~ 3, # July, August, September -> Q3
+                       month %in% 10:12 ~ 4, # October, November, December -> Q4
+                       TRUE ~ NA_real_)    # In case of an invalid month
 
   return(paste(year, quarter, sep = "-"))
 }
@@ -118,36 +117,39 @@ convert_date_to_quarter_YYYY_Q <- function(date_string) {
 #' @param periods A character vector of period strings.
 #' @return A data frame containing processed country parameters with ISO codes,
 #' age codes, sex options, and date periods.
-#' @export
-process_country_parameters <- function(countries, indicators, age_groups,
-                                       sex_options, periods) {
-  # Load indicators_df to convert indicators to indicator codes
-  load("~/visiblespectrum/data/indicators_df.RData")
+process_country_parameters <-
+  function(countries,
+           indicators,
+           age_groups,
+           sex_options,
+           periods) {
+    # Load indicators_df to convert indicators to indicator codes
+    load("~/visiblespectrum/data/indicators_df.RData")
 
-  country_param_dt <- expand.grid(
-    age_groups = age_groups,
-    sex_options = sex_options,
-    indicators = indicators,
-    periods = periods,
-    country = countries,
-    stringsAsFactors = FALSE
-  )
+    country_param_dt <- expand.grid(
+      age_groups = age_groups,
+      sex_options = sex_options,
+      indicators = indicators,
+      periods = periods,
+      country = countries,
+      stringsAsFactors = FALSE
+    )
 
-  processed_country_param_dt <- country_param_dt %>%
-    left_join(indicators_df, by = c("indicators" = "indicator_name")) %>%
-    mutate(
-      code_indicator = indicator_code,
-      code_iso = country_name_to_iso(country),
-      code_age = map(age_groups, age_range_to_code) %>%
-        map(~ .x[!is.na(.x)]),
-      code_sex = tolower(sex_options),
-      code_period = map(periods, convert_date_to_quarter_YYYY_Q) %>%
-        map(~ .x[!is.na(.x)])
-    ) %>%
-    select(-indicator_code)
+    processed_country_param_dt <- country_param_dt %>%
+      left_join(indicators_df, by = c("indicators" = "indicator_name")) %>%
+      mutate(
+        code_indicator = indicator_code,
+        code_iso = country_name_to_iso(country),
+        code_age = map(age_groups, age_range_to_code) %>%
+          map( ~ .x[!is.na(.x)]),
+        code_sex = tolower(sex_options),
+        code_period = map(periods, convert_date_to_quarter_YYYY_Q) %>%
+          map( ~ .x[!is.na(.x)])
+      ) %>%
+      select(-indicator_code)
 
-  return(processed_country_param_dt)
-}
+    return(processed_country_param_dt)
+  }
 
 #' Create API URLs from parameter combinations
 #'
@@ -159,11 +161,11 @@ process_country_parameters <- function(countries, indicators, age_groups,
 #' @param max_level A character or integer representing the user-specified area
 #' level.
 #' @return A data frame with constructed URLs.
-#' @export
 create_urls <- function(processed_country_param_dt, max_level) {
   load("~/visiblespectrum/data/country_max_levels.RData")
 
-  BASE_URL <- "https://naomiviewerserver.azurewebsites.net/api/v1/data?"
+  BASE_URL <-
+    "https://naomiviewerserver.azurewebsites.net/api/v1/data?"
 
   processed_country_param_dt <- processed_country_param_dt %>%
     left_join(country_max_levels_df, by = c("country" = "country_name")) %>%
@@ -172,10 +174,14 @@ create_urls <- function(processed_country_param_dt, max_level) {
         # If user input is "none", set level from country_max_levels
         max_level == "none" ~ max_level_value,
         # Otherwise, take min of max_level and max country value
-        TRUE ~ suppressWarnings(pmin(as.numeric(max_level), max_level_value,
-                                     na.rm = TRUE))
+        TRUE ~ suppressWarnings(pmin(
+          as.numeric(max_level), max_level_value,
+          na.rm = TRUE
+        ))
       ),
-      url = glue("{BASE_URL}country={URLencode(code_iso)}&indicator={URLencode(code_indicator)}&ageGroup={URLencode(code_age)}&period={URLencode(code_period)}&sex={URLencode(code_sex)}&areaLevel={level}")
+      url = glue(
+        "{BASE_URL}country={URLencode(code_iso)}&indicator={URLencode(code_indicator)}&ageGroup={URLencode(code_age)}&period={URLencode(code_period)}&sex={URLencode(code_sex)}&areaLevel={level}"
+      )
     )
 
   return(processed_country_param_dt)
@@ -204,71 +210,94 @@ create_urls <- function(processed_country_param_dt, max_level) {
 #' @return NULL If all inputs are valid. Stops execution and throws an error
 #'         message if any input is invalid, including suggestions for valid inputs.
 #' @export
-validate_inputs <- function(countries, indicators, age_groups, sex_options, periods, max_level, verbose) {
-  valid_countries <- unlist(all_countries)
-  valid_indicators <- unlist(all_indicators)
-  valid_age_groups <- c("15-49", "15-64", "15+", "50+", "all ages", "0-64", "0-14",
-                        "15-24", "25-34", "35-49", "50-64", "65+", "10-19", "25-49",
-                        "0-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34",
-                        "35-39", "40-44", "45-49", "50-54", "55-59", "60-64", "65-69",
-                        "70-74", "75-79", "80+", "<1", "1-4")
-  valid_sex_options <- c("Both", "Male", "Female")
+validate_inputs <-
+  function(countries,
+           indicators,
+           age_groups,
+           sex_options,
+           periods,
+           max_level,
+           verbose) {
+    valid_countries <- unlist(all_countries)
+    valid_indicators <- unlist(all_indicators)
+    valid_age_groups <- c("15-49", "15-64", "15+", "50+", "all ages", "0-64", "0-14",
+                          "15-24", "25-34", "35-49", "50-64", "65+", "10-19", "25-49",
+                          "0-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34",
+                          "35-39", "40-44", "45-49", "50-54", "55-59", "60-64", "65-69",
+                          "70-74", "75-79", "80+", "<1", "1-4")
+    valid_sex_options <- c("Both", "Male", "Female")
 
-  suggest_closest <- function(input, valid_options) {
-    dist <- stringdist::stringdist(input, valid_options, method = "lv")
-    closest <- valid_options[which.min(dist)]
+    suggest_closest <- function(input, valid_options) {
+      dist <- stringdist::stringdist(input, valid_options, method = "lv")
+      closest <- valid_options[which.min(dist)]
 
-    if (min(dist) <= 2) {
-      return(closest)
-    } else {
-      return(NULL)
-    }
-  }
-
-  validate_param <- function(input, valid_options, param_name) {
-    if (all(input %in% valid_options)) {
-      return(TRUE)
-    }
-
-    for (value in input) {
-      if (!(value %in% valid_options)) {
-        suggested <- suggest_closest(value, valid_options)
-        stop(glue("Invalid parameter: {value}. Did you mean {suggested}? Rerun with valid input value."))
+      if (min(dist) <= 2) {
+        return(closest)
+      } else {
+        return(NULL)
       }
     }
-  }
 
-  # Validate all inputs
-  if (!(length(countries) == 1 && (countries %in% c("all", "dreams")))) {
-    validate_param(countries, valid_countries, "country")
-  }
+    validate_param <- function(input, valid_options, param_name) {
+      if (all(input %in% valid_options)) {
+        return(TRUE)
+      }
 
-  if (!(length(indicators) == 1 && indicators == "all")) {
-    validate_param(indicators, valid_indicators, "indicator")
-  }
+      for (value in input) {
+        if (!(value %in% valid_options)) {
+          suggested <- suggest_closest(value, valid_options)
+          stop(
+            glue(
+              "Invalid parameter: {value}. Did you mean {suggested}? Rerun with valid input value."
+            )
+          )
+        }
+      }
+    }
 
-  if (!(length(age_groups) == 1 && age_groups == "standard")) {
-    validate_param(age_groups, valid_age_groups, "age group")
-  }
+    # Validate all inputs
+    if (!(length(countries) == 1 &&
+          (countries %in% c("all", "dreams")))) {
+      validate_param(countries, valid_countries, "country")
+    }
 
-  if (!(length(sex_options) == 1 && sex_options == "all")) {
-    validate_param(sex_options, valid_sex_options, "sex option")
-  }
+    if (!(length(indicators) == 1 && indicators == "all")) {
+      validate_param(indicators, valid_indicators, "indicator")
+    }
 
-  # Validate periods
-  if (periods != "recent" && !all(grepl("\\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s\\d{4}\\b", periods))) {
-    stop("Invalid periods format. Please provide periods in the format 'Month YYYY', e.g., 'December 2023'.")
-  }
+    if (!(length(age_groups) == 1 && age_groups == "standard")) {
+      validate_param(age_groups, valid_age_groups, "age group")
+    }
 
-  # Validate max_level (whole number >= 0 or "none")
-  if (!is.numeric(max_level) && max_level != "none" || (is.numeric(max_level) && (max_level < 0 || max_level != floor(max_level)))) {
-    stop("Invalid max_level. Must be a whole number greater than or equal to 0 or 'none'.")
-  }
+    if (!(length(sex_options) == 1 && sex_options == "all")) {
+      validate_param(sex_options, valid_sex_options, "sex option")
+    }
 
-  if (verbose) {
-    message("All inputs are valid.")
+    # Validate periods
+    if (periods != "recent" &&
+        !all(
+          grepl(
+            "\\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s\\d{4}\\b",
+            periods
+          )
+        )) {
+      stop(
+        "Invalid periods format. Please provide periods in the format 'Month YYYY', e.g., 'December 2023'."
+      )
+    }
+
+    # Validate max_level (whole number >= 0 or "none")
+    if (!is.numeric(max_level) &&
+        max_level != "none" ||
+        (is.numeric(max_level) &&
+         (max_level < 0 || max_level != floor(max_level)))) {
+      stop("Invalid max_level. Must be a whole number greater than or equal to 0 or 'none'.")
+    }
+
+    if (verbose) {
+      message("All inputs are valid.")
+    }
   }
-}
 
 #' Handle Default Input Values
 #'
@@ -281,9 +310,10 @@ validate_inputs <- function(countries, indicators, age_groups, sex_options, peri
 #' @param valid_values A vector of valid values to return if the input matches the default.
 #'
 #' @return A vector of input values or the predefined valid values if the input matches the default.
-handle_default_input <- function(input, default_value, valid_values) {
-  if (length(input) == 1 && input == default_value) {
-    return(valid_values)
+handle_default_input <-
+  function(input, default_value, valid_values) {
+    if (length(input) == 1 && input == default_value) {
+      return(valid_values)
+    }
+    return(input)
   }
-  return(input)
-}
