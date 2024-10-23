@@ -25,15 +25,15 @@ The main function to retrieve data is `pull_naomi`. Users can customize the data
 
 ```R
 pull_naomi(
-  countries = "all",   # Options: a list, "all", or "dreams"
-  indicators = "all",  # Options: a list or "all"
-  age_groups = "standard", # Options: a list or "standard"
-  sex_options = "all", # Options: a list or "all"
-  periods = "recent",  # Options: a list or "recent"
-  max_level = "none",  # Integer indicating the maximum area level depth or "none"
-  verbose = FALSE,     # Logical indicating whether to print progress messages
-  csv = FALSE,         # Logical indicating whether to save results as a CSV
-  wait = 0             # Optional float parameter to specify a delay (in seconds) between API requests. 
+  countries = "all",   # Character vector, "all", or "dreams"
+  indicators = "all",  # Character vector or "all"
+  age_groups = "standard", # Character vector or "standard"
+  sex_options = "all", # Character vector or "all"
+  periods = "recent",  # Character vector or "recent"
+  max_level = "none",  # Integer or "none"
+  verbose = FALSE,     # Logical
+  csv = FALSE,         # Logical
+  wait = 0             # Numeric
 )
 ```
 #### Example Queries
@@ -84,6 +84,8 @@ View(hiv_prev_country_level_query)
 - **`periods`**: A character vector for the periods of interest. Defaults to `"recent"`.
 - **`max_level`**: An integer representing the maximum area level to retrieve data for.
 - **`verbose`**: A logical value that controls whether progress messages are printed during data retrieval.
+- - **`csv_`**: A logical value that controls whether the results will be saved as a CSV or not. CSVs save in the current working directory.
+- **`wait`**: An optional float parameter that introduces a delay (in seconds) between API requests. This can help reduce errors if too many requests are sent in a short period. Set to `0` for no delay, or to a positive value to wait before each request.
 
 #### Parameter Input Options
 
