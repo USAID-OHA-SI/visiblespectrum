@@ -94,6 +94,7 @@ pull_naomi(
 - Add download as a CSV functionality to `pull_naomi`
 - Add all periods functionality to `pull_naomi`
 - Explain what the all/standard input params are
+- Add rerun functionality for fails
 
 ### Notes
 - **Eswatini** is listed as **`ESW`** in the dataset. The ISO code expected by `countrycode` is **`SWZ`**.
