@@ -84,7 +84,7 @@ View(hiv_prev_country_level_query)
 - **`periods`**: A character vector for the periods of interest. Defaults to `"recent"`.
 - **`max_level`**: An integer representing the maximum area level to retrieve data for.
 - **`verbose`**: A logical value that controls whether progress messages are printed during data retrieval.
-- - **`csv_`**: A logical value that controls whether the results will be saved as a CSV or not. CSVs save in the current working directory.
+- **`csv_`**: A logical value that controls whether the results will be saved as a CSV or not. CSVs save in the current working directory.
 - **`wait`**: An optional float parameter that introduces a delay (in seconds) between API requests. This can help reduce errors if too many requests are sent in a short period. Set to `0` for no delay, or to a positive value to wait before each request.
 
 #### Parameter Input Options
