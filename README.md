@@ -9,11 +9,10 @@
 
 1. [Overview](#overview)
 2. [Installation](#installation)
-3. [Usage](#usage)
-4. [Parameters](#parameters)
-5. [In Development](#in-development)
-6. [Notes](#notes)
-7. [License](#license)
+3. [Usage and Parameters](#usage-and-parameters)
+4. [In Development](#in-development)
+5. [Notes](#notes)
+6. [License](#license)
 
 ## Overview
 
@@ -30,7 +29,7 @@ install.packages("devtools")
 # Install visiblespectrum from GitHub
 devtools::install_github("USAID-OHA-SI/visiblespectrum")
 ```
-## Usage
+## Usage and Parameters
 The main function to retrieve data is `pull_naomi`. Users can customize the data retrieval by providing parameters as follows:
 
 ```R
@@ -47,7 +46,7 @@ pull_naomi(
 )
 ```
 
-## Parameters
+### Parameters
 
 - **`countries`**: A character vector specifying the countries to include. Options are `"all"` or `"dreams"`.
 - **`indicators`**: A character vector for the indicators of interest. Options include `"all"` or a specific list.
@@ -71,7 +70,7 @@ pull_naomi(
 | `periods`    | `"recent"`   | Most recent period. Currently set to `December 2023`.                                                                     |
 | `max_level`  | `"none"`     | No max level is set. Highest area level depth will be used.                                                              |
 
-#### Example Queries
+### Example Queries
 
 ```R
 # Pull defaults
