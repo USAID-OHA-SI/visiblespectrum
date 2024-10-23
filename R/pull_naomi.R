@@ -27,10 +27,10 @@
 #' @return A data frame containing the combined results from the API, or a list with
 #'         separate entries for successful and failed requests.
 #' @export
-pull_naomi <- function(countries="all", indicators="all",
-                             age_groups="standard", sex_options="all",
-                             periods="recent", max_level="none",
-                             verbose=FALSE, csv=FALSE, wait=0) {
+pull_naomi <- function(countries = "all", indicators = "all",
+                       age_groups = "standard", sex_options = "all",
+                       periods = "recent", max_level = "none",
+                       verbose = FALSE, csv = FALSE, wait = 0) {
 
   load("~/Github/NAOMI-scrapR/To Use/all_countries.RData")
   load("~/Github/NAOMI-scrapR/To Use/all_indicators.RData")
@@ -44,6 +44,7 @@ pull_naomi <- function(countries="all", indicators="all",
                    "Malawi", "Mozambique", "Namibia", "Rwanda", "South Africa",
                    "South Sudan", "Tanzania", "Uganda", "Zambia", "Zimbabwe")
   }
+
   indicators <- handle_default_input(indicators, "all", unlist(all_indicators))
   age_groups <- handle_default_input(age_groups, "standard",
                                      c("<1", "1-4", "5-9", "10-14", "15-19", "20-24", "25-29",
@@ -63,6 +64,7 @@ pull_naomi <- function(countries="all", indicators="all",
     sex_options = sex_options,
     periods = periods
   )
+
   if (verbose) {
     log_message("Country parameters processed.")
   }
@@ -72,8 +74,8 @@ pull_naomi <- function(countries="all", indicators="all",
   }
 
   # Create URLs
-  param_combinations_with_code <- create_urls(processed_country_param_dt,
-                                              max_level)
+  param_combinations_with_code <- create_urls(processed_country_param_dt, max_level)
+
   if (verbose) {
     log_message("URLs created.")
     print(param_combinations_with_code)
@@ -83,31 +85,33 @@ pull_naomi <- function(countries="all", indicators="all",
   success_count <- 0
   fail_count <- 0
   fail_list <- list()
-  expected_requests <- length(countries)* length(indicators) *length(age_groups) * length(sex_options) * length(periods)
+  expected_requests <- length(countries) * length(indicators) * length(age_groups) * length(sex_options) * length(periods)
 
-  #Create progress bar
-  options(progressr.enable=TRUE)
+  # Create progress bar
+  options(progressr.enable = TRUE)
   handlers(
     handler_progress(
-      format   = ":spin :current/:total (:message) [:bar] :percent in :elapsed ETA: :eta",
-      width    = 60,
+      format = ":spin :current/:total (:message) [:bar] :percent in :elapsed ETA: :eta",
+      width = 60,
       complete = "=",
       enable = TRUE
     )
   )
+
   p <- progressr::progressor(along = seq_len(nrow(param_combinations_with_code)))
 
   with_progress({
     # Loop through each URL to fetch data
     for (i in seq_len(nrow(param_combinations_with_code))) {
       url <- param_combinations_with_code$url[i]
+
       if (verbose) {
         log_message(paste0("Processing: ", url))
       }
 
       response <- httr::GET(url)
 
-      #Update progress bar
+      # Update progress bar
       p()
 
       if (httr::status_code(response) == 200) {
@@ -128,6 +132,7 @@ pull_naomi <- function(countries="all", indicators="all",
             lower = as.numeric(lower),
             upper = as.numeric(upper)
           )
+
         if (nrow(df_final) != 0) {
           results_list[[i]] <- df_final
           success_count <- success_count + 1
@@ -147,21 +152,22 @@ pull_naomi <- function(countries="all", indicators="all",
                              " ", param_combinations_with_code$sex_options[i],
                              " ", param_combinations_with_code$code_indicator[i],
                              "."))
-
-          fail_count <- fail_count + 1
-          fail_record <- param_combinations_with_code[i, ] %>%
-            select(country, periods, age_groups, sex_options, code_indicator, url)
-          fail_list[[i]] <- fail_record
-          next
-        } } else {
-          log_message(paste("Failed to fetch data for URL:", url,
-                            "with status code:", httr::status_code(response)))
           fail_count <- fail_count + 1
           fail_record <- param_combinations_with_code[i, ] %>%
             select(country, periods, age_groups, sex_options, code_indicator, url)
           fail_list[[i]] <- fail_record
           next
         }
+      } else {
+        log_message(paste("Failed to fetch data for URL:", url,
+                          "with status code:", httr::status_code(response)))
+        fail_count <- fail_count + 1
+        fail_record <- param_combinations_with_code[i, ] %>%
+          select(country, periods, age_groups, sex_options, code_indicator, url)
+        fail_list[[i]] <- fail_record
+        next
+      }
+
       # Sleep if wait is specified
       if (wait > 0) {
         Sys.sleep(wait)
@@ -172,28 +178,30 @@ pull_naomi <- function(countries="all", indicators="all",
   if (verbose) {
     log_message("Combining all queries' results...")
   }
+
   if (length(results_list) == 0) {
     log_message("No data fetched from the API.")
     return(NULL)
   }
 
   combined_results <- bind_rows(results_list)
+
   if (verbose) {
     num_rows <- nrow(combined_results)
     num_cols <- ncol(combined_results)
     log_message(paste("Combined results shape: ", num_rows, " rows and ",
                       num_cols, " columns."))
-
   }
 
   if (verbose) {
     log_message("Data fetching completed.")
   }
+
   log_message(paste("Expected requests:", expected_requests))
   log_message(paste("Successful requests:", success_count))
   log_message(paste("Failed requests:", fail_count))
 
-  if (fail_count== 0) {
+  if (fail_count == 0) {
     if (csv) {
       write_csv(combined_results, "naomi_results.csv")
       log_message("Results downloaded to current directory as naomi_results.csv")
@@ -202,11 +210,12 @@ pull_naomi <- function(countries="all", indicators="all",
   } else {
     failed_requests_df <- bind_rows(fail_list)
     cat("Failures in query. To see successful results: $success_data. To see failures, view $fail_data")
+
     if (csv) {
       write_csv(combined_results, "naomi_results.csv")
       log_message("Successful results downloaded to current directory as naomi_results.csv")
     }
+
     return(list(success_data = combined_results, fail_data = failed_requests_df))
   }
-
 }
