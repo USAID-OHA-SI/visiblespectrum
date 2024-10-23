@@ -125,7 +125,6 @@ View(hiv_prev_country_level_query)
 #### Lower Priority
 - Add all periods functionality to `pull_naomi`.
 - Fix issues with the **progress bar** not showing up when using package (but functioning when running in RStudio as a script).
-- Resolve Shiny-related issues in the `Input Tables` vignette (Shiny not functioning as a vignette).
 - Address the warning message regarding **`httr`** and **`progressr`** upon loading.
 
 #### Need More Information
