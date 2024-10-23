@@ -68,7 +68,7 @@ pull_naomi(
 
 ## Parameters
 
-- **`countries`**: A character vector specifying the countries to include. Options are `"all"`, `"standard"`, or `"dreams"`.
+- **`countries`**: A character vector specifying the countries to include. Options are `"all"` or `"dreams"`.
 - **`indicators`**: A character vector for the indicators of interest. Options include `"all"` or a specific list.
 - **`age_groups`**: A character vector for the desired age groups. Can be set to `"standard"` or a specific list.
 - **`sex_options`**: A character vector specifying the sex options. Defaults to `"all"`.
@@ -76,25 +76,47 @@ pull_naomi(
 - **`max_level`**: An integer representing the maximum area level to retrieve data for.
 - **`verbose`**: A logical value that controls whether progress messages are printed during data retrieval.
 
+#### Parameter Input Options
+
+| Parameter    | Option        | Description                                                                                                               |
+|--------------|---------------|---------------------------------------------------------------------------------------------------------------------------|
+| `countries`  | `"all"`      | `c("Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Chad", "Congo", "Cote D'ivoire", "Democratic Republic of the Congo", "Eritrea", "Eswatini", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea Bissau", "Haiti", "Kenya", "Lesotho", "Liberia", "Malawi", "Mali", "Mozambique", "Namibia", "Niger", "Nigeria", "Rwanda", "Sierra Leone", "South Africa", "Togo", "Uganda", "United Republic of Tanzania", "Zambia", "Zimbabwe")` |
+| `countries`  | `"dreams"`   | `c("Botswana", "Cote D'ivoire", "Haiti", "Kenya", "Lesotho", "Malawi", "Mozambique", "Namibia", "Rwanda", "South Africa", "South Sudan", "Tanzania", "Uganda", "Zambia", "Zimbabwe")` |
+| `indicators` | `all`        | `c("Population", "HIV prevalence", "PLHIV", "ART coverage", "ART number (residents)", "ART number (attending)", "PLHIV not on ART", "Proportion PLHIV aware", "Number PLHIV unaware", "Number PLHIV aware", "PLHIV (ART catchment)", "Untreated PLHIV (ART catchment)", "Number aware PLHIV (ART catchment)", "Number unaware PLHIV (ART catchment)", "HIV incidence per 1000", "New infections", "ANC HIV prevalence", "ANC prior ART coverage", "ANC clients", "HIV positive ANC attendees", "ANC attendees already on ART", "ART initiations at ANC", "ANC known positive", "ANC tested positive", "ANC tested negative")` |
+| `age_groups` | `standard`   | `c("<1", "1-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50+")`                      |
+| `sex_options`| `"all"`      | `c("Male", "Female", "Both")`                                                                                          |
+| `periods`    | `"recent"`   | Most recent period. Currently set to `December 2023`.                                                                     |
+| `max_level`  | `"none"`     | No max level is set. Highest area level depth will be used.                                                              |
+
+
 
 ---
 
 ### In Development
+
+#### Higher Priority
+- Add download as a CSV functionality to `pull_naomi`
+- Add rerun functionality for fails
+- Dig into periods issue and handle Mozambique (see notes)
 - Improve error handling for expected data gaps, such as:
   - **Namibia**: Missing PEDS (0-14) data.
   - Some countries missing data for **`ANC tested negative`** and **`ANC tested positive`**.
 - Automatically select and use the most recent available period for all countries.
 - Introduce more robust testing procedures.
-- Draft more detailed vignettes.
+
+#### Lower Priority
+- Add all periods functionality to `pull_naomi`
 - Fix issues with the **progress bar** not showing up when using package (but functioning when running in RStudio as a script).
 - Resolve Shiny-related issues in the `Input Tables` vignette (Shiny not functioning as a vignette).
 - Address the warning message regarding **`httr`** and **`progressr`** upon loading.
+
+#### Need More Information
 - Create a standard set of input indicators that would be most useful (there are 27 indicators at present and under the default, they are all being run)
-- Add download as a CSV functionality to `pull_naomi`
-- Add all periods functionality to `pull_naomi`
-- Explain what the all/standard input params are
-- Add rerun functionality for fails
-- Dig into periods issue and handle Mozambique (see notes)
+  - What should this standard set be?
+- Draft more detailed vignettes.
+  - What should it/they look like?
+- Fix `README` to be more standardized (only necessary if `visiblespectrum` will be separate from `mindthegap`)
+
 
 ### Notes
 - **Eswatini** is listed as **`ESW`** in the dataset. The ISO code expected by `countrycode` is **`SWZ`**.
