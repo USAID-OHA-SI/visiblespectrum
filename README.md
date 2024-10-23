@@ -76,7 +76,7 @@ pull_naomi(
 - **`max_level`**: An integer representing the maximum area level to retrieve data for.
 - **`verbose`**: A logical value that controls whether progress messages are printed during data retrieval.
 
-#### Special Options
+#### Parameter Input Options
 
 | Parameter    | Option        | Description                                                                                                               |
 |--------------|---------------|---------------------------------------------------------------------------------------------------------------------------|
@@ -85,7 +85,7 @@ pull_naomi(
 | `indicators` | `all`        | `c("Population", "HIV prevalence", "PLHIV", "ART coverage", "ART number (residents)", "ART number (attending)", "PLHIV not on ART", "Proportion PLHIV aware", "Number PLHIV unaware", "Number PLHIV aware", "PLHIV (ART catchment)", "Untreated PLHIV (ART catchment)", "Number aware PLHIV (ART catchment)", "Number unaware PLHIV (ART catchment)", "HIV incidence per 1000", "New infections", "ANC HIV prevalence", "ANC prior ART coverage", "ANC clients", "HIV positive ANC attendees", "ANC attendees already on ART", "ART initiations at ANC", "ANC known positive", "ANC tested positive", "ANC tested negative")` |
 | `age_groups` | `standard`   | `c("<1", "1-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50+")`                      |
 | `sex_options`| `"all"`      | `c("Male", "Female", "Both")`                                                                                          |
-| `periods`    | `"recent"`   | Most recent period. Currently set to `December 2023`                                                                     |
+| `periods`    | `"recent"`   | Most recent period. Currently set to `December 2023`.                                                                     |
 | `max_level`  | `"none"`     | No max level is set. Highest area level depth will be used.                                                              |
 
 
@@ -96,7 +96,6 @@ pull_naomi(
 
 #### Higher Priority
 - Add download as a CSV functionality to `pull_naomi`
-- Explain what the all/standard input params are
 - Add rerun functionality for fails
 - Dig into periods issue and handle Mozambique (see notes)
 - Improve error handling for expected data gaps, such as:
