@@ -51,6 +51,7 @@ single_inputs_query <- pull_naomi(
   sex_options = c("Female"),
   periods = c("December 2023"),
   csv = TRUE
+)
 View(single_inputs_query)
 
 # Pull ART coverage for DREAMS countries for females aged 15-24 in the most recent period (default) at area levels 0 and 1 with a wait
