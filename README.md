@@ -31,7 +31,11 @@ pull_naomi(
   sex_options = "all", # Options: a list or "all"
   periods = "recent",  # Options: a list or "recent"
   max_level = "none",  # Integer indicating the maximum area level depth or "none"
-  verbose = FALSE      # Logical indicating whether to print progress messages
+  verbose = FALSE,     # Logical indicating whether to print progress messages
+  csv = FALSE,         # Logical indicating whether to save results as a CSV
+  wait = 0             # Optional float parameter to specify a delay (in seconds) between API requests. 
+                       # Set a positive value to scrape more slowly, which can help reduce errors 
+                       # if too many requests are sent in a short period.
 )
 ```
 #### Example Queries
@@ -41,22 +45,24 @@ pull_naomi(
 defaults_query <- pull_naomi()
 View(defaults_query)
 
-# Pull one query for Angola's 15-19 female population in December 2023
+# Pull one query for Angola's 15-19 female population in December 2023 and save to CSV
 single_inputs_query <- pull_naomi(
   countries = c("Angola"),
   indicators = c("Population"),
   age_groups = c("15-19"),
   sex_options = c("Female"),
-  periods = c("December 2023")
+  periods = c("December 2023"),
+  csv = TRUE
 View(single_inputs_query)
 
-# Pull ART coverage for DREAMS countries for females aged 15-24 in the most recent period (default) at area levels 0 and 1
+# Pull ART coverage for DREAMS countries for females aged 15-24 in the most recent period (default) at area levels 0 and 1 with a wait
 dreams_art_query <- pull_naomi(
   countries = "dreams", 
   indicators = c("ART coverage"), 
   age_groups = c("15-24"), 
   sex_options = c("Female"), 
-  max_level = 1
+  max_level = 1,
+  wait = 0.5
 )
 View(dreams_art_query)
 
@@ -99,14 +105,13 @@ View(hiv_prev_country_level_query)
 ### In Development
 
 #### Higher Priority
-- Add download as a CSV functionality to `pull_naomi`
-- Add rerun functionality for fails
-- Dig into periods issue and handle Mozambique (see notes)
 - Improve error handling for expected data gaps, such as:
   - **Namibia**: Missing PEDS (0-14) data.
   - Some countries missing data for **`ANC tested negative`** and **`ANC tested positive`**.
 - Automatically select and use the most recent available period for all countries.
+  - Dig into periods issue and handle Mozambique (see notes)
 - Introduce more robust testing procedures.
+- Add rerun functionality for fails
 
 #### Lower Priority
 - Add all periods functionality to `pull_naomi`
