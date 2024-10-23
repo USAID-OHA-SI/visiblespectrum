@@ -22,8 +22,8 @@ knitr::opts_chunk$set(warning = FALSE)
 ```
 
 ```{r echo=FALSE}
-load("output.RData")
-load("ui_scrape.RData")
+load(system.file("extdata", "output.RData", package = "visiblespectrum"))
+load(system.file("extdata", "ui_scrape.RData", package = "visiblespectrum"))
 ```
 
 ```{r results='asis'}
