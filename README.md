@@ -5,6 +5,15 @@
 
 **A package to scrape the UNAIDS NAOMI Spectrum HIV sub-national estimates viewer.**
 
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Installation](#installation)
+3. [Usage and Parameters](#usage-and-parameters)
+4. [In Development](#in-development)
+5. [Notes](#notes)
+6. [License](#license)
+
 ## Overview
 
 The `visiblespectrum` package is currently in development and aims to provide users with easy access to HIV sub-national estimates from the [UNAIDS NAOMI Spectrum tool](https://naomi-spectrum.unaids.org/). The primary function for pulling data is `pull_naomi`, which allows users to specify various parameters to customize their queries.
@@ -20,57 +29,24 @@ install.packages("devtools")
 # Install visiblespectrum from GitHub
 devtools::install_github("USAID-OHA-SI/visiblespectrum")
 ```
-## Usage
+## Usage and Parameters
 The main function to retrieve data is `pull_naomi`. Users can customize the data retrieval by providing parameters as follows:
 
 ```R
 pull_naomi(
-  countries = "all",   # Options: a list, "all", or "dreams"
-  indicators = "all",  # Options: a list or "all"
-  age_groups = "standard", # Options: a list or "standard"
-  sex_options = "all", # Options: a list or "all"
-  periods = "recent",  # Options: a list or "recent"
-  max_level = "none",  # Integer indicating the maximum area level depth or "none"
-  verbose = FALSE      # Logical indicating whether to print progress messages
+  countries = "all",   # Character vector, "all", or "dreams"
+  indicators = "all",  # Character vector or "all"
+  age_groups = "standard", # Character vector or "standard"
+  sex_options = "all", # Character vector or "all"
+  periods = "recent",  # Character vector or "recent"
+  max_level = "none",  # Integer or "none"
+  verbose = FALSE,     # Logical
+  csv = FALSE,         # Logical
+  wait = 0             # Numeric
 )
 ```
-#### Example Queries
 
-```R
-# Pull defaults
-defaults_query <- pull_naomi()
-View(defaults_query)
-
-# Pull one query for Angola's 15-19 female population in December 2023
-single_inputs_query <- pull_naomi(
-  countries = c("Angola"),
-  indicators = c("Population"),
-  age_groups = c("15-19"),
-  sex_options = c("Female"),
-  periods = c("December 2023")
-View(single_inputs_query)
-
-# Pull ART coverage for DREAMS countries for females aged 15-24 in the most recent period (default) at area levels 0 and 1
-dreams_art_query <- pull_naomi(
-  countries = "dreams", 
-  indicators = c("ART coverage"), 
-  age_groups = c("15-24"), 
-  sex_options = c("Female"), 
-  max_level = 1
-)
-View(dreams_art_query)
-
-# Pull HIV prevalence for all ages (together) for all genders (together) in all countries at the country (area level 0) level
-hiv_prev_country_level_query <- pull_naomi(
-  indicators = c("HIV prevalence"),
-  age_groups = c("all ages"),
-  sex_options = c("Both"),
-  max_level = 0
-)
-View(hiv_prev_country_level_query)
-```
-
-## Parameters
+### Parameters
 
 - **`countries`**: A character vector specifying the countries to include. Options are `"all"` or `"dreams"`.
 - **`indicators`**: A character vector for the indicators of interest. Options include `"all"` or a specific list.
@@ -79,6 +55,8 @@ View(hiv_prev_country_level_query)
 - **`periods`**: A character vector for the periods of interest. Defaults to `"recent"`.
 - **`max_level`**: An integer representing the maximum area level to retrieve data for.
 - **`verbose`**: A logical value that controls whether progress messages are printed during data retrieval.
+- **`csv_`**: A logical value that controls whether the results will be saved as a CSV or not. CSVs save in the current working directory.
+- **`wait`**: An optional float parameter that introduces a delay (in seconds) between API requests. This can help reduce errors if too many requests are sent in a short period. Set to `0` for no delay, or to a positive value to wait before each request.
 
 #### Parameter Input Options
 
@@ -92,24 +70,60 @@ View(hiv_prev_country_level_query)
 | `periods`    | `"recent"`   | Most recent period. Currently set to `December 2023`.                                                                     |
 | `max_level`  | `"none"`     | No max level is set. Highest area level depth will be used.                                                              |
 
+### Example Queries
 
+```R
+# Pull defaults
+defaults_query <- pull_naomi()
+View(defaults_query)
+
+# Pull one query for Angola's 15-19 female population in December 2023 and save to CSV
+single_inputs_query <- pull_naomi(
+  countries = c("Angola"),
+  indicators = c("Population"),
+  age_groups = c("15-19"),
+  sex_options = c("Female"),
+  periods = c("December 2023"),
+  csv = TRUE
+)
+View(single_inputs_query)
+
+# Pull ART coverage for DREAMS countries for females aged 15-24 at area levels 0 and 1 with a wait
+dreams_art_query <- pull_naomi(
+  countries = "dreams", 
+  indicators = c("ART coverage"), 
+  age_groups = c("15-24"), 
+  sex_options = c("Female"), 
+  max_level = 1,
+  wait = 0.5
+)
+View(dreams_art_query)
+
+# Pull HIV prevalence for all ages (together) for all genders (together) in all countries at the country (area level 0) level
+hiv_prev_country_level_query <- pull_naomi(
+  indicators = c("HIV prevalence"),
+  age_groups = c("all ages"),
+  sex_options = c("Both"),
+  max_level = 0
+)
+View(hiv_prev_country_level_query)
+```
 
 ---
 
 ### In Development
 
 #### Higher Priority
-- Add download as a CSV functionality to `pull_naomi`
-- Add rerun functionality for fails
-- Dig into periods issue and handle Mozambique (see notes)
 - Improve error handling for expected data gaps, such as:
   - **Namibia**: Missing PEDS (0-14) data.
   - Some countries missing data for **`ANC tested negative`** and **`ANC tested positive`**.
 - Automatically select and use the most recent available period for all countries.
+  - Dig into periods issue and handle Mozambique (see notes)
 - Introduce more robust testing procedures.
+- Add rerun functionality for fails.
 
 #### Lower Priority
-- Add all periods functionality to `pull_naomi`
+- Add all periods functionality to `pull_naomi`.
 - Fix issues with the **progress bar** not showing up when using package (but functioning when running in RStudio as a script).
 - Resolve Shiny-related issues in the `Input Tables` vignette (Shiny not functioning as a vignette).
 - Address the warning message regarding **`httr`** and **`progressr`** upon loading.
@@ -127,8 +141,8 @@ View(hiv_prev_country_level_query)
 - **Namibia** does not have data for the `0-14` age group, which will result in failures when attempting to retrieve it.
 - Several countries do not have data for `ANC Positive`/`ANC Negative` even though in the NAOMI UI they are dropdown options.
 - Area levels are 0-based, meaning level 0 represents the country level. When specifying a max level depth, the data will include levels from 0 up to the selected max. For example, setting `max_level = 2` will return data for levels 0 (country), 1, and 2.
-- Every country has data for period December 2023, which is why it was used for development. All countries have a dropdown option (may not include all data) for September 2024 (Q3) except for Mozambique, which has the option for December 2024 (Q4). It appears in future years as well Mozambique is one quarter later than all other countries.
-- `pull_naomi` and `validate_parameters` are the external methods
+- Every country has data for period `December 2023`, which is why it was used for development. All countries have a dropdown option (may not include all data) for `September 2024` (Q3) except for Mozambique, which has the option for `December 2024` (Q4). It appears in future years as well Mozambique is one quarter later than all other countries.
+- `pull_naomi` and `validate_parameters` are the external methods.
 
 
 
