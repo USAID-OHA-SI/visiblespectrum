@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>visiblespectrum Parameter Inputs</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+<script>$(document).ready(function(){
+    if (typeof $('[data-toggle="tooltip"]').tooltip === 'function') {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    if ($('[data-toggle="popover"]').popover === 'function') {
+        $('[data-toggle="popover"]').popover();
+    }
+});
+</script>
+<style type="text/css">
+.lightable-minimal {
+border-collapse: separate;
+border-spacing: 16px 1px;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-minimal td {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal th {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal thead tr:last-child th {
+border-bottom: 2px solid #00000050;
+empty-cells: hide;
+}
+.lightable-minimal tbody tr:first-child td {
+padding-top: 0.5em;
+}
+.lightable-minimal.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-minimal.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic {
+border-top: 0.16em solid #111111;
+border-bottom: 0.16em solid #111111;
+width: 100%;
+margin-bottom: 10px;
+margin: 10px 5px;
+}
+.lightable-classic tfoot tr td {
+border: 0;
+}
+.lightable-classic tfoot tr:first-child td {
+border-top: 0.14em solid #111111;
+}
+.lightable-classic caption {
+color: #222222;
+}
+.lightable-classic td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic thead tr:last-child th {
+border-bottom: 0.10em solid #111111;
+}
+.lightable-classic.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic-2 {
+border-top: 3px double #111111;
+border-bottom: 3px double #111111;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-classic-2 tfoot tr td {
+border: 0;
+}
+.lightable-classic-2 tfoot tr:first-child td {
+border-top: 3px double #111111;
+}
+.lightable-classic-2 caption {
+color: #222222;
+}
+.lightable-classic-2 td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic-2 th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic-2 tbody tr:last-child td {
+border-bottom: 3px double #111111;
+}
+.lightable-classic-2 thead tr:last-child th {
+border-bottom: 1px solid #111111;
+}
+.lightable-classic-2.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic-2.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #EEE;
+border-collapse: collapse;
+margin-bottom: 10px;
+}
+.lightable-material tfoot tr td {
+border: 0;
+}
+.lightable-material tfoot tr:first-child td {
+border-top: 1px solid #EEE;
+}
+.lightable-material th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+}
+.lightable-material td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+border-top: 1px solid #eeeeee;
+}
+.lightable-material.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #ddd;
+}
+.lightable-material-dark {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #FFFFFF12;
+border-collapse: collapse;
+margin-bottom: 10px;
+background-color: #363640;
+}
+.lightable-material-dark tfoot tr td {
+border: 0;
+}
+.lightable-material-dark tfoot tr:first-child td {
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF60;
+}
+.lightable-material-dark td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF;
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark.lightable-hover tbody tr:hover {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody tr:nth-child(even) {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material-dark.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #FFFFFF12;
+}
+.lightable-paper {
+width: 100%;
+margin-bottom: 10px;
+color: #444;
+}
+.lightable-paper tfoot tr td {
+border: 0;
+}
+.lightable-paper tfoot tr:first-child td {
+border-top: 1px solid #00000020;
+}
+.lightable-paper thead tr:last-child th {
+color: #666;
+vertical-align: bottom;
+border-bottom: 1px solid #00000020;
+line-height: 1.15em;
+padding: 10px 5px;
+}
+.lightable-paper td {
+vertical-align: middle;
+border-bottom: 1px solid #00000010;
+line-height: 1.15em;
+padding: 7px 5px;
+}
+.lightable-paper.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-paper.lightable-striped tbody tr:nth-child(even) {
+background-color: #00000008;
+}
+.lightable-paper.lightable-striped tbody td {
+border: 0;
+}
+</style>
+<style type="text/css">.tabwid {
+font-size: initial;
+padding-bottom: 1em;
+}
+.tabwid table{
+border-spacing:0px !important;
+border-collapse:collapse;
+line-height:1;
+margin-left:auto;
+margin-right:auto;
+border-width: 0;
+border-color: transparent;
+caption-side: top;
+}
+.tabwid-caption-bottom table{
+caption-side: bottom;
+}
+.tabwid_left table{
+margin-left:0;
+}
+.tabwid_right table{
+margin-right:0;
+}
+.tabwid td, .tabwid th {
+padding: 0;
+}
+.tabwid a {
+text-decoration: none;
+}
+.tabwid thead {
+background-color: transparent;
+}
+.tabwid tfoot {
+background-color: transparent;
+}
+.tabwid table tr {
+background-color: transparent;
+}
+.katex-display {
+margin: 0 0 !important;
+}
+</style>
+<script>document.addEventListener("DOMContentLoaded", function(event) {
+  var els = document.querySelectorAll(".tabwid");
+  var tabwid_link = document.querySelector('link[href*="tabwid.css"]')
+  if (tabwid_link === null) {
+    const tabwid_styles = document.evaluate("//style[contains(., 'tabwid')]", document, null, XPathResult.ANY_TYPE, null );
+    tabwid_link = tabwid_styles.iterateNext();
+  }
+
+  Array.prototype.forEach.call(els, function(template) {
+      const dest = document.createElement("div");
+      template.parentNode.insertBefore(dest, template.nextSibling)
+      dest.setAttribute("class", "flextable-shadow-host");
+      const fantome = dest.attachShadow({mode: 'open'});
+      fantome.appendChild(template);
+      if (tabwid_link !== null) {
+        fantome.appendChild(tabwid_link.cloneNode(true));
+      }
+  });
+});
+
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">visiblespectrum Parameter Inputs</h1>
+
+
+
+<p>Downloads: <a href="../inst/extdata/all_parameters_summary.csv">All
+Parameters Summary CSV</a> | <a href="../inst/extdata/parameters_by_country.csv">Parameters by Country
+CSV</a></p>
+<div id="input-parameters-summary" class="section level3">
+<h3>Input Parameters Summary</h3>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+parameter
+</th>
+<th style="text-align:left;">
+options
+</th>
+<th style="text-align:right;">
+num
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Countries
+</td>
+<td style="text-align:left;">
+Angola, Benin, Botswana, Burkina Faso, Burundi, Chad, Congo, Cote
+D’ivoire, Democratic Republic of the Congo, Eritrea, Eswatini, Ethiopia,
+Gabon, Gambia, Ghana, Guinea, Guinea Bissau, Haiti, Kenya, Lesotho,
+Liberia, Malawi, Mali, Mozambique, Namibia, Niger, Nigeria, Rwanda,
+Sierra Leone, South Africa, Togo, Uganda, United Republic of Tanzania,
+Zambia, Zimbabwe
+</td>
+<td style="text-align:right;">
+35
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Indicators
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative, Reported ART
+number, ART reporting bias (relative)
+</td>
+<td style="text-align:right;">
+27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Age Categories
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Sex Options
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Periods
+</td>
+<td style="text-align:left;">
+December 2015, December 2023, September 2024, September 2025, September
+2026, March 2012, March 2021, September 2010, December 2016, March 2015,
+September 2022, December 2017, December 2013, June 2010, September 2021,
+March 2016, December 2020, March 2013, December 2014, June 2018, March
+2020, December 2018, June 2013, September 2020, December 2024, December
+2025, December 2026, September 2017, June 2012, June 2019, June 2017,
+March 2014, December 2022
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>
+<strong>For which parameters do most countries have data?</strong> More
+than 90% of countries have data for these categories and are therefore
+referred to as <i>standard parameters</i>.
+</summary>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+parameter
+</th>
+<th style="text-align:left;">
+default_values
+</th>
+<th style="text-align:right;">
+num
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Indicators
+</td>
+<td style="text-align:left;">
+ANC attendees already on ART, ANC clients, ANC HIV prevalence, ANC known
+positive, ANC prior ART coverage, ANC tested negative, ANC tested
+positive, ART coverage, ART initiations at ANC, ART number (attending),
+ART number (residents), HIV incidence per 1000, HIV positive ANC
+attendees, HIV prevalence, New infections, Number aware PLHIV (ART
+catchment), Number PLHIV aware, Number PLHIV unaware, Number unaware
+PLHIV (ART catchment), PLHIV, PLHIV (ART catchment), PLHIV not on ART,
+Population, Proportion PLHIV aware, Untreated PLHIV (ART catchment)
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Age Categories
+</td>
+<td style="text-align:left;">
+&lt;1, 0-14, 0-4, 0-64, 1-4, 10-14, 10-19, 15-19, 15-24, 15-49, 15-64,
+15+, 20-24, 25-29, 25-34, 25-49, 30-34, 35-39, 35-49, 40-44, 45-49, 5-9,
+50-54, 50-64, 50+, 55-59, 60-64, 65-69, 65+, 70-74, 75-79, 80+, all ages
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Sex Options
+</td>
+<td style="text-align:left;">
+Both, Female, Male
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p><br><br></p>
+<details>
+<summary>
+<strong>Which countries deviate from these standard set of input
+parameters?</strong> Some countries have different parameters options
+based on available data. <i> Kenya, Malawi, Namibia </i>have deviations
+from the standard set.
+</summary>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+country
+</th>
+<th style="text-align:left;">
+parameter
+</th>
+<th style="text-align:right;">
+num
+</th>
+<th style="text-align:left;">
+type
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Kenya
+</td>
+<td style="text-align:left;">
+Indicators
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+missing
+</td>
+<td style="text-align:left;">
+Number aware PLHIV (ART catchment), Number PLHIV aware, Number PLHIV
+unaware, Number unaware PLHIV (ART catchment), Proportion PLHIV aware
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Malawi
+</td>
+<td style="text-align:left;">
+Indicators
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+extra
+</td>
+<td style="text-align:left;">
+Reported ART number, ART reporting bias (relative)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Namibia
+</td>
+<td style="text-align:left;">
+Age Categories
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+missing
+</td>
+<td style="text-align:left;">
+&lt;1, 0-14, 0-4, 1-4, 10-14, 10-19, 5-9
+</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p><br><br></p>
+<details>
+<summary>
+<strong>For which periods does each country have data?</strong> Periods
+vary by country ranging from 06/10 to 12/26. Every country has data for
+12/23.
+</summary>
+<div class="tabwid" style="overflow-x:auto;width:100%;overflow-y:auto;height:900px;"><style>.cl-13483806{}.cl-130c7eba{font-family:'Source Sans Pro';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(32, 32, 32, 1.00);background-color:transparent;}.cl-130c7ee2{font-family:'Source Sans Pro';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(32, 32, 32, 1.00);background-color:transparent;}.cl-130c7eec{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-1325e0b2{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-1325e0c6{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-1326c23e{width:0.75in;background-color:rgba(144, 144, 144, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(211, 211, 211, 1.00);border-top: 1pt solid rgba(211, 211, 211, 1.00);border-left: 1pt solid rgba(211, 211, 211, 1.00);border-right: 1pt solid rgba(211, 211, 211, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-1326c252{width:0.75in;background-color:rgba(211, 211, 211, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(211, 211, 211, 1.00);border-top: 1pt solid rgba(211, 211, 211, 1.00);border-left: 1pt solid rgba(211, 211, 211, 1.00);border-right: 1pt solid rgba(211, 211, 211, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-1326c253{width:0.75in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(211, 211, 211, 1.00);border-top: 1pt solid rgba(211, 211, 211, 1.00);border-left: 1pt solid rgba(211, 211, 211, 1.00);border-right: 1pt solid rgba(211, 211, 211, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-1326c25c{width:0.75in;background-color:rgba(21, 71, 138, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(211, 211, 211, 1.00);border-top: 1pt solid rgba(211, 211, 211, 1.00);border-left: 1pt solid rgba(211, 211, 211, 1.00);border-right: 1pt solid rgba(211, 211, 211, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-1326c25d{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-13483806 th {position: sticky;top: 0;z-index: 4;}.cl-13483806 {border-collapse: separate !important;}.cl-13483806 thead > tr > th:first-child {position:sticky;left:0;z-index:5;}.cl-13483806 tbody > tr > td:first-child {position:sticky;left:0;z-index:3;}</style><table data-quarto-disable-processing="true" class="cl-13483806"><thead><tr style="overflow-wrap:break-word;"><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">country</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">06/10</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">09/10</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">03/12</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">06/12</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">03/13</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">06/13</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">12/13</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">03/14</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">12/14</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">03/15</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">12/15</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">03/16</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">12/16</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">06/17</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">09/17</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">12/17</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">06/18</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">12/18</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">06/19</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">03/20</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">09/20</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">12/20</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">03/21</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">09/21</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">09/22</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">12/22</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">12/23</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">09/24</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">12/24</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">09/25</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">12/25</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">09/26</span></p></th><th class="cl-1326c23e"><p class="cl-1325e0b2"><span class="cl-130c7eba">12/26</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Angola</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Benin</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Botswana</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Burkina Faso</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Burundi</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Chad</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Congo</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Cote D&#39;ivoire</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Democratic Republic of the Congo</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Eritrea</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Eswatini</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Ethiopia</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Gabon</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Gambia</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Ghana</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Guinea</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Guinea Bissau</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Haiti</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Kenya</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Lesotho</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Liberia</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Malawi</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Mali</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Mozambique</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Namibia</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Niger</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Nigeria</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Rwanda</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Sierra Leone</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">South Africa</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Togo</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Uganda</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">United Republic of Tanzania</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Zambia</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-1326c252"><p class="cl-1325e0b2"><span class="cl-130c7eba">Zimbabwe</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td><td class="cl-1326c25c"><p class="cl-1325e0c6"><span class="cl-130c7ee2">x</span></p></td><td class="cl-1326c253"><p class="cl-1325e0c6"><span class="cl-130c7ee2"></span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="34" class="cl-1326c25d"><p class="cl-1325e0b2"><span class="cl-130c7eec">Countries marked with &#39;x&#39; indicate participation in the respective periods.</span></p></td></tr></tfoot></table></div>
+</details>
+<p><br><br></p>
+<details>
+<summary>
+<strong>View All Parameters by Country</strong>
+</summary>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Country
+</th>
+<th style="text-align:left;">
+Indicators
+</th>
+<th style="text-align:left;">
+Ages
+</th>
+<th style="text-align:left;">
+Sex_Options
+</th>
+<th style="text-align:left;">
+Periods
+</th>
+<th style="text-align:right;">
+Max_Level
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Angola
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+December 2015, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Benin
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+March 2012, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Botswana
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+March 2021, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Burkina Faso
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+September 2010, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Burundi
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+December 2016, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Chad
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+March 2015, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Congo
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+September 2022, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Cote D’ivoire
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+December 2017, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Democratic Republic of the Congo
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+December 2013, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Eritrea
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+June 2010, December 2023, September 2024, September 2025, September 2026
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Eswatini
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+September 2021, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Ethiopia
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+March 2016, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Gabon
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+December 2020, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Gambia
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+March 2013, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Ghana
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+December 2014, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Guinea
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+June 2018, December 2023, September 2024, September 2025, September 2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Guinea Bissau
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+June 2010, December 2023, September 2024, September 2025, September 2026
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Haiti
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+March 2020, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Kenya
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, PLHIV (ART catchment),
+Untreated PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+December 2018, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Lesotho
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+March 2020, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Liberia
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+June 2013, December 2023, September 2024, September 2025, September 2026
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Malawi
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative, Reported ART
+number, ART reporting bias (relative)
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+March 2016, September 2020, December 2023, September 2024, September
+2025, September 2026
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Mali
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+March 2013, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Mozambique
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+September 2021, December 2023, December 2024, December 2025, December
+2026
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Namibia
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 15-24, 25-34, 35-49, 50-64, 65+,
+25-49, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54, 55-59,
+60-64, 65-69, 70-74, 75-79, 80+
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+September 2017, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Niger
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+June 2012, December 2023, September 2024, September 2025, September 2026
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Nigeria
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+December 2018, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Rwanda
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+December 2018, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Sierra Leone
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+June 2019, December 2023, September 2024, September 2025, September 2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+South Africa
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+June 2017, September 2022, December 2023, September 2024, September
+2025, September 2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Togo
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+March 2014, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Uganda
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+December 2020, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+United Republic of Tanzania
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+December 2022, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Zambia
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+September 2021, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Zimbabwe
+</td>
+<td style="text-align:left;">
+Population, HIV prevalence, PLHIV, ART coverage, ART number (residents),
+ART number (attending), PLHIV not on ART, Proportion PLHIV aware, Number
+PLHIV unaware, Number PLHIV aware, PLHIV (ART catchment), Untreated
+PLHIV (ART catchment), Number aware PLHIV (ART catchment), Number
+unaware PLHIV (ART catchment), HIV incidence per 1000, New infections,
+ANC HIV prevalence, ANC prior ART coverage, ANC clients, HIV positive
+ANC attendees, ANC attendees already on ART, ART initiations at ANC, ANC
+known positive, ANC tested positive, ANC tested negative
+</td>
+<td style="text-align:left;">
+15-49, 15-64, 15+, 50+, all ages, 0-64, 0-14, 15-24, 25-34, 35-49,
+50-64, 65+, 10-19, 25-49, 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34,
+35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80+,
+&lt;1, 1-4
+</td>
+<td style="text-align:left;">
+Both, Male, Female
+</td>
+<td style="text-align:left;">
+March 2020, December 2023, September 2024, September 2025, September
+2026
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p><br><br><br></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,4 +1,5 @@
 ~%2FGithub%2Fvisiblespectrum%2F.Rbuildignore="252B5866"
+~%2FGithub%2Fvisiblespectrum%2F.gitignore="F140FDC7"
 ~%2FGithub%2Fvisiblespectrum%2FDESCRIPTION="8A8FEE7A"
 ~%2FGithub%2Fvisiblespectrum%2FIN_DEVELOPMENT_tests.R="E6FD51B3"
 ~%2FGithub%2Fvisiblespectrum%2FNAMESPACE="78F6EBCD"
@@ -8,6 +9,7 @@
 ~%2FGithub%2Fvisiblespectrum%2FR%2Fpull_naomi.R="05E1F452"
 ~%2FGithub%2Fvisiblespectrum%2Fdoc%2Finput_tables.R="BCB5A604"
 ~%2FGithub%2Fvisiblespectrum%2Fdoc%2Finput_tables.Rmd="59184ACA"
+~%2FGithub%2Fvisiblespectrum%2Fdoc%2Finput_tables.html="00A0E362"
 ~%2FGithub%2Fvisiblespectrum%2Finst%2Fextdata%2Fg.R="13617A4B"
 ~%2FGithub%2Fvisiblespectrum%2Fman%2Fall_countries.Rd="E876FDE5"
 ~%2FGithub%2Fvisiblespectrum%2Fman%2Fhello.Rd="18AF32CB"

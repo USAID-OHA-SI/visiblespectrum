@@ -1,13 +1,4 @@
----
-title: "visiblespectrum Parameter Inputs"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{visiblespectrum Parameter Inputs}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r setup, include=FALSE}
+## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(echo = FALSE)
 library(knitr)
 library(dplyr)
@@ -19,14 +10,12 @@ library(glitr)
 library(htmltools)
 invisible(library(here))
 knitr::opts_chunk$set(warning = FALSE)
-```
 
-```{r load, echo=FALSE}
+## ----load, echo=FALSE---------------------------------------------------------
 load(system.file("extdata", "output.RData", package = "visiblespectrum"))
 load(system.file("extdata", "ui_scrape.RData", package = "visiblespectrum"))
-```
 
-```{r results='asis'}
+## ----results='asis'-----------------------------------------------------------
 options_summary_df <- output$options_summary_df 
 
 options_summary_df <- options_summary_df %>%
@@ -63,28 +52,19 @@ parameters_by_country <- ui_scrape %>%
     Periods = as.character(paste(unique(unlist(Periods)), collapse = ", ")),
     Max_Level = max(Max_Level)
   )
-```
 
-```{r echo=FALSE}
+## ----echo=FALSE---------------------------------------------------------------
 write.csv(options_summary_df, here("inst/extdata", "all_parameters_summary.csv"), row.names = FALSE)
 write.csv(parameters_by_country, here("inst/extdata", "parameters_by_country.csv"), row.names = FALSE)
-```
 
-Downloads: [All Parameters Summary CSV](../inst/extdata/all_parameters_summary.csv) | [Parameters by Country CSV](../inst/extdata/parameters_by_country.csv)
-
-
-### Input Parameters Summary
-
-```{r echo=FALSE}
+## ----echo=FALSE---------------------------------------------------------------
 # Display the modified DataFrame
 kable(options_summary_df)%>%
   kable_styling() %>%
   column_spec(1, bold = TRUE)
 
-```
-<details><summary><strong>For which parameters do most countries have data?</strong>
-More than 90% of countries have data for these categories and are therefore referred to as <i>standard parameters</i>.</summary>
-```{r echo=FALSE}
+
+## ----echo=FALSE---------------------------------------------------------------
 defaults_df <- output$defaults_df
 defaults_df <- defaults_df %>%
     mutate(
@@ -102,11 +82,8 @@ kable(defaults_df)%>%
   kable_styling() %>%
   column_spec(1, bold = TRUE)
 
-```
-</details>
-<br><br>
 
-```{r}
+## -----------------------------------------------------------------------------
 deviations_df <- output$deviations_df
 deviations_df <- deviations_df %>%
     mutate(
@@ -119,27 +96,18 @@ deviations_df <- deviations_df %>%
       "ui_periods" = "Periods"
     )
   )
-```
 
-<details>
-<summary><strong>Which countries deviate from these standard set of input parameters?</strong> Some countries have different parameters options based on available data. <i> `r deviations_df$country` </i>have deviations from the standard set.</summary>
-
-```{r}
+## -----------------------------------------------------------------------------
 kable(deviations_df)  %>%
   kable_styling() %>%
   column_spec(1, bold = TRUE)
-```
-</details>
-<br><br>
-```{r}
+
+## -----------------------------------------------------------------------------
 country_period_df <- output$country_period_df
 column_names <- colnames(country_period_df)
 columns_with_x <- sapply(country_period_df, function(col) all(col == 'x'))
-```
-<details>
-<summary><strong>For which periods does each country have data?</strong> Periods vary by country ranging from `r column_names[2]` to `r column_names[length(column_names)]`. Every country has data for `r names(columns_with_x[columns_with_x])`. </summary>
 
-```{r}
+## -----------------------------------------------------------------------------
 border_style <- fp_border(color = light_grey, width = 1, style = "solid")
 colormatrix <- ifelse(country_period_df[, -1] == "x", midnight_blue, "white")
 
@@ -175,19 +143,11 @@ country_period_ft <- flextable(country_period_df) %>%
   )
 country_period_ft
 
-```
-</details>
-<br><br>
 
-<details>
-<summary><strong>View All Parameters by Country</strong></summary>
-```{r}
+## -----------------------------------------------------------------------------
 # Create a gt table
 kable(parameters_by_country)%>%
   kable_styling() %>%
   column_spec(1, bold = TRUE)
 
-```
-</details>
 
-<br><br><br>
