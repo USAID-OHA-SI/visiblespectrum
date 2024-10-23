@@ -68,13 +68,13 @@ pull_naomi(
 
 ## Parameters
 
-- `**countries**`: A character vector specifying the countries to include. Options are `"all"`, `"standard"`, or `"dreams"`.
-- `**indicators**`: A character vector for the indicators of interest. Options include `"all"` or a specific list.
-- `**age_groups**`: A character vector for the desired age groups. Can be set to `"standard"` or a specific list.
-- `**sex_options**`: A character vector specifying the sex options. Defaults to `"all"`.
-- `**periods**`: A character vector for the periods of interest. Defaults to `"recent"`.
-- `**max_level**`: An integer representing the maximum area level to retrieve data for.
-- `**verbose**`: A logical value that controls whether progress messages are printed during data retrieval.
+- **`countries`**: A character vector specifying the countries to include. Options are `"all"`, `"standard"`, or `"dreams"`.
+- **`indicators`**: A character vector for the indicators of interest. Options include `"all"` or a specific list.
+- **`age_groups`**: A character vector for the desired age groups. Can be set to `"standard"` or a specific list.
+- **`sex_options`**: A character vector specifying the sex options. Defaults to `"all"`.
+- **`periods`**: A character vector for the periods of interest. Defaults to `"recent"`.
+- **`max_level`**: An integer representing the maximum area level to retrieve data for.
+- **`verbose`**: A logical value that controls whether progress messages are printed during data retrieval.
 
 
 ---
