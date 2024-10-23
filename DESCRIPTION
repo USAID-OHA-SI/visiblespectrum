@@ -17,7 +17,8 @@ Imports:
   countrycode,
   httr,
   testthat,
-  progressr
+  progressr,
+  stringdist
 RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Suggests:

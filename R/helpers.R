@@ -9,7 +9,7 @@
 #' @import readr
 #' @import tidyr
 #' @import countrycode
-#'
+#' @import stringdist
 #' @importFrom dplyr %>%
 #' @importFrom dplyr mutate
 
@@ -179,4 +179,112 @@ create_urls <- function(processed_country_param_dt, max_level) {
     )
 
   return(processed_country_param_dt)
+}
+
+#' Validate Input Parameters for Data Scraping
+#'
+#' This function checks the validity of the input parameters used for scraping data.
+#' It ensures that the provided countries, indicators, age groups, sex options, periods,
+#' and maximum level meet the predefined criteria.
+#'
+#' @param countries A character vector of countries. Accepts "all" or "dreams"
+#'        as valid options, or a specific country from the predefined list.
+#' @param indicators A character vector of indicators. Accepts "all" or a specific
+#'        indicator from the predefined list.
+#' @param age_groups A character vector of age groups. Accepts "standard" or a
+#'        specific age group from the predefined list.
+#' @param sex_options A character vector of sex options. Accepts "all" or a specific
+#'        option from the predefined list (i.e., "Both", "Male", "Female").
+#' @param periods A character vector of periods in the format "Month YYYY". Each
+#'        period must match the specified format.
+#' @param max_level A numeric value representing the maximum level. Must be a
+#'        whole number greater than 0.
+#' @param verbose A logical value indicating whether to print messages about input
+#'        validation. Defaults to FALSE.
+#' @return NULL If all inputs are valid. Stops execution and throws an error
+#'         message if any input is invalid, including suggestions for valid inputs.
+#' @export
+validate_inputs <- function(countries, indicators, age_groups, sex_options, periods, max_level, verbose) {
+  valid_countries <- unlist(all_countries)
+  valid_indicators <- unlist(all_indicators)
+  valid_age_groups <- c("15-49", "15-64", "15+", "50+", "all ages", "0-64", "0-14",
+                        "15-24", "25-34", "35-49", "50-64", "65+", "10-19", "25-49",
+                        "0-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34",
+                        "35-39", "40-44", "45-49", "50-54", "55-59", "60-64", "65-69",
+                        "70-74", "75-79", "80+", "<1", "1-4")
+  valid_sex_options <- c("Both", "Male", "Female")
+
+  suggest_closest <- function(input, valid_options) {
+    dist <- stringdist::stringdist(input, valid_options, method = "lv")
+    closest <- valid_options[which.min(dist)]
+
+    if (min(dist) <= 2) {
+      return(closest)
+    } else {
+      return(NULL)
+    }
+  }
+
+  validate_param <- function(input, valid_options, param_name) {
+    if (all(input %in% valid_options)) {
+      return(TRUE)
+    }
+
+    for (value in input) {
+      if (!(value %in% valid_options)) {
+        suggested <- suggest_closest(value, valid_options)
+        stop(glue("Invalid parameter: {value}. Did you mean {suggested}? Rerun with valid input value."))
+      }
+    }
+  }
+
+  # Validate all inputs
+  if (!(length(countries) == 1 && (countries %in% c("all", "dreams")))) {
+    validate_param(countries, valid_countries, "country")
+  }
+
+  if (!(length(indicators) == 1 && indicators == "all")) {
+    validate_param(indicators, valid_indicators, "indicator")
+  }
+
+  if (!(length(age_groups) == 1 && age_groups == "standard")) {
+    validate_param(age_groups, valid_age_groups, "age group")
+  }
+
+  if (!(length(sex_options) == 1 && sex_options == "all")) {
+    validate_param(sex_options, valid_sex_options, "sex option")
+  }
+
+  # Validate periods
+  if (periods != "recent" && !all(grepl("\\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s\\d{4}\\b", periods))) {
+    stop("Invalid periods format. Please provide periods in the format 'Month YYYY', e.g., 'December 2023'.")
+  }
+
+  # Validate max_level (whole number >= 0 or "none")
+  if (!is.numeric(max_level) && max_level != "none" || (is.numeric(max_level) && (max_level < 0 || max_level != floor(max_level)))) {
+    stop("Invalid max_level. Must be a whole number greater than or equal to 0 or 'none'.")
+  }
+
+  if (verbose) {
+    message("All inputs are valid.")
+  }
+}
+
+
+#' Handle Default Input Values
+#'
+#' This helper function manages default input handling by returning a set of valid values
+#' when the input matches a specified default value. If the input does not match the default,
+#' the original input is returned.
+#'
+#' @param input A vector of input values to be validated.
+#' @param default_value A value that represents the default input option.
+#' @param valid_values A vector of valid values to return if the input matches the default.
+#'
+#' @return A vector of input values or the predefined valid values if the input matches the default.
+handle_default_input <- function(input, default_value, valid_values) {
+  if (length(input) == 1 && input == default_value) {
+    return(valid_values)
+  }
+  return(input)
 }

@@ -32,39 +32,19 @@ pull_naomi <- function(countries="all", indicators="all",
                              periods="recent", max_level="none",
                              verbose=FALSE) {
 
-  # Handle countries input
-  if (length(countries) == 1 && countries == "all") {
-    load("~/visiblespectrum/data/all_countries.RData")
-    countries <- unlist(all_countries)
-  }
-  if (length(countries) == 1 && countries == "dreams") {
-    load("~/visiblespectrum/data/all_countries.RData")
-    countries <- c("Botswana", "Cote D'ivoire", "Haiti", "Kenya", "Lesotho",
-                   "Malawi", "Mozambique", "Namibia", "Rwanda", "South Africa",
-                   "South Sudan", "Tanzania", "Uganda", "Zambia", "Zimbabwe")
-  }
+  load("~/Github/NAOMI-scrapR/To Use/all_countries.RData")
+  load("~/Github/NAOMI-scrapR/To Use/all_indicators.RData")
 
-  # Handle indicators input
-  if (length(indicators) == 1 && indicators == "all") {
-    load("~/visiblespectrum/data/all_indicators.RData")
-    indicators <- unlist(all_indicators)
-  }
+  # Validate inputs before proceeding
+  validate_inputs(countries, indicators, age_groups, sex_options, periods, max_level, verbose)
 
-  # Handle age_groups input
-  if (length(age_groups) == 1 && age_groups == "standard") {
-    age_groups <- c("<1", "1-4", "5-9", "10-14", "15-19", "20-24",
-                    "25-29", "30-34", "35-39", "40-44", "45-49", "50+")
-  }
-
-  # Handle sex_options input
-  if (length(sex_options) == 1 && sex_options == "all") {
-    sex_options <- c("Male", "Female", "Both")
-  }
-
-  # Handle periods input
-  if (length(periods) == 1 && periods == "recent") {
-    periods <- "December 2023" # Adjust this as necessary
-  }
+  countries <- handle_default_input(countries, "all", unlist(all_countries))
+  indicators <- handle_default_input(indicators, "all", unlist(all_indicators))
+  age_groups <- handle_default_input(age_groups, "standard",
+                                     c("<1", "1-4", "5-9", "10-14", "15-19", "20-24", "25-29",
+                                       "30-34", "35-39", "40-44", "45-49", "50+"))
+  sex_options <- handle_default_input(sex_options, "all", c("Male", "Female", "Both"))
+  periods <- handle_default_input(periods, "recent", "December 2023")  # Adjust this when needed!
 
   if (verbose) {
     log_message("Processing country parameters...")
