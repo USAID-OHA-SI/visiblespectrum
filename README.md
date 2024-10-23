@@ -54,7 +54,7 @@ single_inputs_query <- pull_naomi(
 )
 View(single_inputs_query)
 
-# Pull ART coverage for DREAMS countries for females aged 15-24 in the most recent period (default) at area levels 0 and 1 with a wait
+# Pull ART coverage for DREAMS countries for females aged 15-24 at area levels 0 and 1 with a wait
 dreams_art_query <- pull_naomi(
   countries = "dreams", 
   indicators = c("ART coverage"), 
