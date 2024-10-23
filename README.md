@@ -83,7 +83,6 @@ pull_naomi(
 - Improve error handling for expected data gaps, such as:
   - **Namibia**: Missing PEDS (0-14) data.
   - Some countries missing data for **`ANC tested negative`** and **`ANC tested positive`**.
-- Implement checks to ensure the user's input parameters are valid, and provide suggestions if not.
 - Automatically select and use the most recent available period for all countries.
 - Introduce more robust testing procedures.
 - Draft more detailed vignettes.
