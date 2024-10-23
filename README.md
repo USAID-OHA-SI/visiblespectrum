@@ -38,32 +38,36 @@ pull_naomi(
 
 ```R
 # Pull defaults
-pull_naomi()
+defaults_query <- pull_naomi()
+View(defaults_query)
 
 # Pull one query for Angola's 15-19 female population in December 2023
-pull_naomi(
+single_inputs_query <- pull_naomi(
   countries = c("Angola"),
   indicators = c("Population"),
   age_groups = c("15-19"),
   sex_options = c("Female"),
   periods = c("December 2023")
+View(single_inputs_query)
 
 # Pull ART coverage for DREAMS countries for females aged 15-24 in the most recent period (default) at area levels 0 and 1
-pull_naomi(
+dreams_art_query <- pull_naomi(
   countries = "dreams", 
   indicators = c("ART coverage"), 
   age_groups = c("15-24"), 
   sex_options = c("Female"), 
   max_level = 1
 )
+View(dreams_art_query)
 
 # Pull HIV prevalence for all ages (together) for all genders (together) in all countries at the country (area level 0) level
-pull_naomi(
+hiv_prev_country_level_query <- pull_naomi(
   indicators = c("HIV prevalence"),
   age_groups = c("all ages"),
   sex_options = c("Both"),
   max_level = 0
 )
+View(hiv_prev_country_level_query)
 ```
 
 ## Parameters
