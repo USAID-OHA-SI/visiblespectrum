@@ -270,7 +270,6 @@ validate_inputs <- function(countries, indicators, age_groups, sex_options, peri
   }
 }
 
-
 #' Handle Default Input Values
 #'
 #' This helper function manages default input handling by returning a set of valid values
