@@ -68,7 +68,7 @@ pull_naomi(
 
 ## Parameters
 
-- **`countries`**: A character vector specifying the countries to include. Options are `"all"`, `"standard"`, or `"dreams"`.
+- **`countries`**: A character vector specifying the countries to include. Options are `"all"` or `"dreams"`.
 - **`indicators`**: A character vector for the indicators of interest. Options include `"all"` or a specific list.
 - **`age_groups`**: A character vector for the desired age groups. Can be set to `"standard"` or a specific list.
 - **`sex_options`**: A character vector specifying the sex options. Defaults to `"all"`.
@@ -76,6 +76,11 @@ pull_naomi(
 - **`max_level`**: An integer representing the maximum area level to retrieve data for.
 - **`verbose`**: A logical value that controls whether progress messages are printed during data retrieval.
 
+#### Special Options
+
+`countries`
+`"all"`: `c("Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Chad", "Congo", "Cote D'ivoire", "Democratic Republic of the Congo", "Eritrea", "Eswatini", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea Bissau", "Haiti", "Kenya", "Lesotho", "Liberia", "Malawi", "Mali", "Mozambique", "Namibia", "Niger", "Nigeria", "Rwanda", "Sierra Leone", "South Africa", "Togo", "Uganda", "United Republic of Tanzania", "Zambia", "Zimbabwe")`
+`"dreams"`: `c("Botswana", "Cote D'ivoire", "Haiti", "Kenya", "Lesotho", "Malawi", "Mozambique", "Namibia", "Rwanda", "South Africa", "South Sudan", "Tanzania", "Uganda", "Zambia", "Zimbabwe")`
 
 ---
 
@@ -103,6 +108,7 @@ pull_naomi(
   - What should this standard set be?
 - Draft more detailed vignettes.
   - What should it/they look like?
+- Fix `README` to be more standardized (only necessary if `visiblespectrum` will be separate from `mindthegap`)
 
 
 ### Notes
