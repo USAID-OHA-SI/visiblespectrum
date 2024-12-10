@@ -32,8 +32,9 @@ pull_naomi <- function(countries = "all", indicators = "all",
                        periods = "recent", max_level = "none",
                        verbose = FALSE, csv = FALSE, wait = 0) {
 
-  load("~/Github/NAOMI-scrapR/To Use/all_countries.RData")
-  load("~/Github/NAOMI-scrapR/To Use/all_indicators.RData")
+  #load("~/Github/NAOMI-scrapR/To Use/all_countries.RData")
+  load(system.file("data", "all_countries.RData", package = "visiblespectrum"))
+  load(system.file("data", "all_indicators.RData", package = "visiblespectrum"))
 
   # Validate inputs before proceeding
   validate_inputs(countries, indicators, age_groups, sex_options, periods, max_level, verbose)

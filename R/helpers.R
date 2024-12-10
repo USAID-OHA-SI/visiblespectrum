@@ -124,7 +124,8 @@ process_country_parameters <-
            sex_options,
            periods) {
     # Load indicators_df to convert indicators to indicator codes
-    load("~/visiblespectrum/data/indicators_df.RData")
+    load(system.file("data", "indicators_df.RData", package = "visiblespectrum"))
+
 
     country_param_dt <- expand.grid(
       age_groups = age_groups,
@@ -162,7 +163,8 @@ process_country_parameters <-
 #' level.
 #' @return A data frame with constructed URLs.
 create_urls <- function(processed_country_param_dt, max_level) {
-  load("~/visiblespectrum/data/country_max_levels.RData")
+  load(system.file("data", "country_max_levels.RData", package = "visiblespectrum"))
+
 
   BASE_URL <-
     "https://naomiviewerserver.azurewebsites.net/api/v1/data?"
