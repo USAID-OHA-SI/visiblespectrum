@@ -114,9 +114,9 @@ View(hiv_prev_country_level_query)
 ### In Development
 
 #### Higher Priority
-- Improve error handling for expected data gaps, such as:
+- Improve graceful error handling for expected data gaps, such as:
   - **Namibia**: Missing PEDS (0-14) data.
-  - Some countries missing data for **`ANC tested negative`** and **`ANC tested positive`**.
+  - Some countries missing data for ANC indicators including **`ANC tested negative`** and **`ANC tested positive`**.
 - Automatically select and use the most recent available period for all countries.
   - Dig into periods issue and handle Mozambique (see notes)
 - Introduce more robust testing procedures.
