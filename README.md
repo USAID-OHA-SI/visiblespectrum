@@ -35,11 +35,11 @@ The main function to retrieve data is `pull_naomi`. Users can customize the data
 ```R
 pull_naomi(
   countries = "all",   # Character vector, "all", or "dreams"
-  indicators = "all",  # Character vector or "all"
+  indicators = "all",  # Character vector, "all" or "no anc"
   age_groups = "standard", # Character vector or "standard"
   sex_options = "all", # Character vector or "all"
   periods = "recent",  # Character vector or "recent"
-  max_level = "none",  # Integer or "none"
+  max_level = 5,       # Integer
   verbose = FALSE,     # Logical
   csv = FALSE,         # Logical
   wait = 0             # Numeric
@@ -49,13 +49,13 @@ pull_naomi(
 ### Parameters
 
 - **`countries`**: A character vector specifying the countries to include. Options are `"all"` or `"dreams"`.
-- **`indicators`**: A character vector for the indicators of interest. Options include `"all"` or a specific list.
+- **`indicators`**: A character vector for the indicators of interest. Options include `"all"`, `"no anc"`, or a specific list.
 - **`age_groups`**: A character vector for the desired age groups. Can be set to `"standard"` or a specific list.
 - **`sex_options`**: A character vector specifying the sex options. Defaults to `"all"`.
 - **`periods`**: A character vector for the periods of interest. Defaults to `"recent"`.
 - **`max_level`**: An integer representing the maximum area level to retrieve data for.
 - **`verbose`**: A logical value that controls whether progress messages are printed during data retrieval.
-- **`csv_`**: A logical value that controls whether the results will be saved as a CSV or not. CSVs save in the current working directory.
+- **`csv`**: A logical value that controls whether the results will be saved as a CSV or not. CSVs save in the current working directory.
 - **`wait`**: An optional float parameter that introduces a delay (in seconds) between API requests. This can help reduce errors if too many requests are sent in a short period. Set to `0` for no delay, or to a positive value to wait before each request.
 
 #### Parameter Input Options
@@ -68,7 +68,7 @@ pull_naomi(
 | `age_groups` | `standard`   | `c("<1", "1-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50+")`                      |
 | `sex_options`| `"all"`      | `c("Male", "Female", "Both")`                                                                                          |
 | `periods`    | `"recent"`   | Most recent period. Currently set to `December 2023`.                                                                     |
-| `max_level`  | `"none"`     | No max level is set. Highest area level depth will be used.                                                              |
+| `max_level`  | `5`     | No max level is set. Highest area level depth will be used.                                                              |
 
 ### Example Queries
 
