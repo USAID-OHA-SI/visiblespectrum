@@ -32,7 +32,7 @@ pull_naomi <- function(countries = "all", indicators = "all",
                        periods = "recent", max_level = "none",
                        verbose = FALSE, csv = FALSE, wait = 0) {
 
-  #load("~/Github/NAOMI-scrapR/To Use/all_countries.RData")
+  # Load data
   load(system.file("data", "all_countries.RData", package = "visiblespectrum"))
   load(system.file("data", "all_indicators.RData", package = "visiblespectrum"))
 
