@@ -60,7 +60,7 @@ pull_naomi(
 
 #### Parameter Input Options
 
-Input any of the possible values into a character vector (ensure each value is enclosed in quotes). View the full list of parameters here: [https://github.com/USAID-OHA-SI/visiblespectrum/blob/main/inst/extdata/all_parameters_summary.csv][all_parameters_summary.csv].
+Input any of the possible values into a character vector (ensure each value is enclosed in quotes). View the full list of parameters here: [all_parameters_summary.csv](https://github.com/USAID-OHA-SI/visiblespectrum/blob/main/inst/extdata/all_parameters_summary.csv).
 
 You can also use the predefined input options below:
 
