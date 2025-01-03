@@ -60,6 +60,10 @@ pull_naomi(
 
 #### Parameter Input Options
 
+Input any of the possible values into a character vector (ensure each value is enclosed in quotes). View the full list of parameters here: all_parameters_summary.csv.
+
+You can also use the predefined input options below:
+
 | Parameter    | Option        | Description                                                                                                               |
 |--------------|---------------|---------------------------------------------------------------------------------------------------------------------------|
 | `countries`  | `"all"`      | `c("Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Chad", "Congo", "Cote D'ivoire", "Democratic Republic of the Congo", "Eritrea", "Eswatini", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea Bissau", "Haiti", "Kenya", "Lesotho", "Liberia", "Malawi", "Mali", "Mozambique", "Namibia", "Niger", "Nigeria", "Rwanda", "Sierra Leone", "South Africa", "Togo", "Uganda", "United Republic of Tanzania", "Zambia", "Zimbabwe")` |
