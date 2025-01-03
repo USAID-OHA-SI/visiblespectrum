@@ -110,6 +110,16 @@ hiv_prev_country_level_query <- pull_naomi(
   max_level = 0
 )
 View(hiv_prev_country_level_query)
+
+pull_naomi(
+  countries = c("Angola"),
+  indicators = c("Population"),
+  age_groups = c("15-24"),
+  sex_options = c("Male"),
+  periods = c("September 2024"),
+  area_level=1
+)
+
 ```
 
 ---
