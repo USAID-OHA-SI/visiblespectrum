@@ -74,6 +74,8 @@ pull_naomi(
 ### Example Queries
 
 ```R
+library(visiblespectrum)
+
 # Pull defaults
 defaults_query <- pull_naomi()
 View(defaults_query)
