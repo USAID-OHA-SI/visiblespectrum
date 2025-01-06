@@ -117,40 +117,35 @@ convert_date_to_quarter_YYYY_Q <- function(date_string) {
 #' @param periods A character vector of period strings.
 #' @return A data frame containing processed country parameters with ISO codes,
 #' age codes, sex options, and date periods.
-process_country_parameters <-
-  function(countries,
-           indicators,
-           age_groups,
-           sex_options,
-           periods) {
-    # Load indicators_df to convert indicators to indicator codes
-    load(system.file("data", "indicators_df.RData", package = "visiblespectrum"))
+process_country_parameters <- function(countries,
+                                       indicators,
+                                       age_groups,
+                                       sex_options,
+                                       periods) {
+  # Load indicators_df to convert indicators to indicator codes
+  load(system.file("data", "indicators_df.RData", package = "visiblespectrum"))
 
+  country_param_dt <- expand.grid(
+    age_groups = age_groups,
+    sex_options = sex_options,
+    indicators = indicators,
+    periods = periods,
+    stringsAsFactors = FALSE
+  )
 
-    country_param_dt <- expand.grid(
-      age_groups = age_groups,
-      sex_options = sex_options,
-      indicators = indicators,
-      periods = periods,
-      country = countries,
-      stringsAsFactors = FALSE
-    )
+  processed_country_param_dt <- country_param_dt %>%
+    left_join(indicators_df, by = c("indicators" = "indicator_name")) %>%
+    mutate(
+      code_iso = list(sapply(countries, country_name_to_iso)),
+      code_indicator = indicator_code,
+      code_age = map(age_groups, age_range_to_code) %>% map(~ .x[!is.na(.x)]),
+      code_sex = tolower(sex_options),
+      code_period = map(periods, convert_date_to_quarter_YYYY_Q) %>% map(~ .x[!is.na(.x)])
+    ) %>%
+    select(-indicator_code)
 
-    processed_country_param_dt <- country_param_dt %>%
-      left_join(indicators_df, by = c("indicators" = "indicator_name")) %>%
-      mutate(
-        code_indicator = indicator_code,
-        code_iso = country_name_to_iso(country),
-        code_age = map(age_groups, age_range_to_code) %>%
-          map( ~ .x[!is.na(.x)]),
-        code_sex = tolower(sex_options),
-        code_period = map(periods, convert_date_to_quarter_YYYY_Q) %>%
-          map( ~ .x[!is.na(.x)])
-      ) %>%
-      select(-indicator_code)
-
-    return(processed_country_param_dt)
-  }
+  return(processed_country_param_dt)
+}
 
 #' Create API URLs from parameter combinations
 #'
@@ -163,26 +158,19 @@ process_country_parameters <-
 #' level.
 #' @return A data frame with constructed URLs.
 create_urls <- function(processed_country_param_dt, max_level) {
+  # Load the max levels data
   load(system.file("data", "country_max_levels.RData", package = "visiblespectrum"))
 
+  # Base URL for API calls
+  BASE_URL <- "https://naomiviewerserver.azurewebsites.net/api/v1/data?"
 
-  BASE_URL <-
-    "https://naomiviewerserver.azurewebsites.net/api/v1/data?"
-
+  # Add country codes and area level, then group and summarize
   processed_country_param_dt <- processed_country_param_dt %>%
-    left_join(country_max_levels_df, by = c("country" = "country_name")) %>%
+    mutate(country_codes = sapply(code_iso, paste, collapse = "&country=")) %>%
+    mutate(level = max_level) %>%
     mutate(
-      level = case_when(
-        # If user input is "none", set level from country_max_levels
-        max_level == "none" ~ max_level_value,
-        # Otherwise, take min of max_level and max country value
-        TRUE ~ suppressWarnings(pmin(
-          as.numeric(max_level), max_level_value,
-          na.rm = TRUE
-        ))
-      ),
       url = glue(
-        "{BASE_URL}country={URLencode(code_iso)}&indicator={URLencode(code_indicator)}&ageGroup={URLencode(code_age)}&period={URLencode(code_period)}&sex={URLencode(code_sex)}&areaLevel={level}"
+        "{BASE_URL}country={URLencode(country_codes)}&indicator={URLencode(code_indicator)}&ageGroup={URLencode(code_age)}&period={URLencode(code_period)}&sex={URLencode(code_sex)}&areaLevel={level}"
       )
     )
 
@@ -218,9 +206,10 @@ validate_inputs <-
            age_groups,
            sex_options,
            periods,
-           max_level,
            verbose) {
+    load(system.file("data", "all_countries.RData", package = "visiblespectrum"))
     valid_countries <- unlist(all_countries)
+    load(system.file("data", "all_indicators.RData", package = "visiblespectrum"))
     valid_indicators <- unlist(all_indicators)
     valid_age_groups <- c("15-49", "15-64", "15+", "50+", "all ages", "0-64", "0-14",
                           "15-24", "25-34", "35-49", "50-64", "65+", "10-19", "25-49",
@@ -263,7 +252,7 @@ validate_inputs <-
       validate_param(countries, valid_countries, "country")
     }
 
-    if (!(length(indicators) == 1 && indicators == "all")) {
+    if (!(length(indicators) == 1 && indicators %in% c("all", "no anc"))) {
       validate_param(indicators, valid_indicators, "indicator")
     }
 
@@ -286,14 +275,6 @@ validate_inputs <-
       stop(
         "Invalid periods format. Please provide periods in the format 'Month YYYY', e.g., 'December 2023'."
       )
-    }
-
-    # Validate max_level (whole number >= 0 or "none")
-    if (!is.numeric(max_level) &&
-        max_level != "none" ||
-        (is.numeric(max_level) &&
-         (max_level < 0 || max_level != floor(max_level)))) {
-      stop("Invalid max_level. Must be a whole number greater than or equal to 0 or 'none'.")
     }
 
     if (verbose) {
