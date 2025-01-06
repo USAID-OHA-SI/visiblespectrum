@@ -121,30 +121,6 @@ View(hiv_prev_country_level_query)
 
 ---
 
-### In Development
-
-#### Higher Priority
-- Improve graceful error handling for expected data gaps, such as:
-  - **Namibia**: Missing PEDS (0-14) data.
-  - Some countries missing data for ANC indicators including **`ANC tested negative`** and **`ANC tested positive`**.
-- Automatically select and use the most recent available period for all countries.
-  - Dig into periods issue and handle Mozambique (see notes)
-- Introduce more robust testing procedures.
-- Add rerun functionality for fails.
-
-#### Lower Priority
-- Add all periods functionality to `pull_naomi`.
-- Fix issues with the **progress bar** not showing up when using package (but functioning when running in RStudio as a script).
-- Address the warning message regarding **`httr`** and **`progressr`** upon loading.
-
-#### Need More Information
-- Create a standard set of input indicators that would be most useful (there are 27 indicators at present and under the default, they are all being run)
-  - What should this standard set be?
-- Draft more detailed vignettes.
-  - What should it/they look like?
-- Fix `README` to be more standardized (only necessary if `visiblespectrum` will be separate from `mindthegap`)
-
-
 ### Notes
 - **Eswatini** is listed as **`ESW`** in the dataset. The ISO code expected by `countrycode` is **`SWZ`**.
 - **Namibia** does not have data for the `0-14` age group, which will result in failures when attempting to retrieve it.
