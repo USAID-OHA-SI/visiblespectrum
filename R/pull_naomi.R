@@ -24,20 +24,23 @@
 #' @param periods A character vector of period strings. Defaults to "recent".
 #' @param max_level A character or integer representing area level. Defaults to "none".
 #' @param verbose A logical value indicating whether to print progress messages. Defaults to FALSE.
+#' @param csv A logical value indicating whether to output a CSV. Defaults to FALSE.
+#' @param csv_name A string for the CSV name. Defaults to "naomi_results".
+#' @param wait An optional parameter to add a wait (by second) during the scraping process.
 #' @return A data frame containing the combined results from the API, or a list with
 #'         separate entries for successful and failed requests.
 #' @export
 pull_naomi <- function(countries = "all", indicators = "all",
                        age_groups = "standard", sex_options = "all",
-                       periods = "recent", max_level = "none",
-                       verbose = FALSE, csv = FALSE, wait = 0) {
-
+                       periods = "recent", max_level = 5,
+                       verbose = FALSE, csv = FALSE, csv_name = "naomi_results", wait = 0) {
   # Load data
+
   load(system.file("data", "all_countries.RData", package = "visiblespectrum"))
   load(system.file("data", "all_indicators.RData", package = "visiblespectrum"))
 
   # Validate inputs before proceeding
-  validate_inputs(countries, indicators, age_groups, sex_options, periods, max_level, verbose)
+  validate_inputs(countries, indicators, age_groups, sex_options, periods, verbose)
 
   countries <- handle_default_input(countries, "all", unlist(all_countries))
   if (length(countries) == 1 && countries == "dreams") {
@@ -46,7 +49,15 @@ pull_naomi <- function(countries = "all", indicators = "all",
                    "Tanzania", "Uganda", "Zambia", "Zimbabwe")
   }
 
-  indicators <- handle_default_input(indicators, "all", unlist(all_indicators))
+  indicators <- handle_default_input(indicators, "all", all_indicators[[1]][[1]])
+  indicators <- handle_default_input(indicators, "no anc", c("Population", "HIV prevalence", "PLHIV",
+                                                             "ART coverage", "ART number (residents)",
+                                                             "ART number (attending)", "PLHIV not on ART",
+                                                             "Proportion PLHIV aware", "Number PLHIV unaware",
+                                                             "Number PLHIV aware", "PLHIV (ART catchment)",
+                                                             "Untreated PLHIV (ART catchment)", "Number aware PLHIV (ART catchment)",
+                                                             "Number unaware PLHIV (ART catchment)", "HIV incidence per 1000",
+                                                             "New infections"))
   age_groups <- handle_default_input(age_groups, "standard",
                                      c("<1", "1-4", "5-9", "10-14", "15-19", "20-24", "25-29",
                                        "30-34", "35-39", "40-44", "45-49", "50+"))
@@ -86,95 +97,83 @@ pull_naomi <- function(countries = "all", indicators = "all",
   success_count <- 0
   fail_count <- 0
   fail_list <- list()
-  expected_requests <- length(countries) * length(indicators) * length(age_groups) * length(sex_options) * length(periods)
+  expected_requests <- length(indicators) * length(age_groups) * length(sex_options) * length(periods)
 
-  # Create progress bar
-  options(progressr.enable = TRUE)
-  handlers(
-    handler_progress(
-      format = ":spin :current/:total (:message) [:bar] :percent in :elapsed ETA: :eta",
-      width = 60,
-      complete = "=",
-      enable = TRUE
-    )
-  )
+  for (i in seq_len(nrow(param_combinations_with_code))) {
+    url <- param_combinations_with_code$url[i]
 
-  p <- progressr::progressor(along = seq_len(nrow(param_combinations_with_code)))
+    if (verbose) {
+      log_message(paste0("Processing: ", url))
+    }
 
-  with_progress({
-    # Loop through each URL to fetch data
-    for (i in seq_len(nrow(param_combinations_with_code))) {
-      url <- param_combinations_with_code$url[i]
+    response <- httr::GET(url)
 
-      if (verbose) {
-        log_message(paste0("Processing: ", url))
-      }
+    if (httr::status_code(response) == 200) {
+      response_content <- httr::content(response, "text")
 
-      response <- httr::GET(url)
+      # Read the CSV data from the response
+      df_final <- read_csv(response_content, show_col_types = FALSE) %>%
+        mutate(
+          period = param_combinations_with_code$periods[i],
+          period_year_quarter = param_combinations_with_code$code_period[i],
+          age_group = param_combinations_with_code$age_groups[i],
+          sex = param_combinations_with_code$sex_options[i],
+          indicator = param_combinations_with_code$code_indicator[i],
+          iso = param_combinations_with_code$code_iso[i],
+          level = as.numeric(level),
+          mean = as.numeric(mean),
+          lower = as.numeric(lower),
+          upper = as.numeric(upper)
+        )
 
-      # Update progress bar
-      p()
+      # Handle the fill down of country names
+      df_final <- df_final %>%
+        mutate(country = NA) %>%
+        mutate(country = ifelse(level == 0, area, NA)) %>%
+        fill(country, .direction = "down") %>%
+        mutate(country = ifelse(level == 0, area, country)) %>%
+        select(-iso)
 
-      if (httr::status_code(response) == 200) {
-        response_content <- httr::content(response, "text")
+      if (nrow(df_final) != 0) {
+        results_list[[i]] <- df_final
+        success_count <- success_count + 1
 
-        # Read the CSV data from the response
-        df_final <- read_csv(response_content, show_col_types = FALSE) %>%
-          mutate(
-            country = param_combinations_with_code$country[i],
-            period = param_combinations_with_code$periods[i],
-            period_year_quarter = param_combinations_with_code$code_period[i],
-            age_group = param_combinations_with_code$age_groups[i],
-            sex = param_combinations_with_code$sex_options[i],
-            indicator = param_combinations_with_code$code_indicator[i],
-            iso = param_combinations_with_code$code_iso[i],
-            level = as.numeric(level),
-            mean = as.numeric(mean),
-            lower = as.numeric(lower),
-            upper = as.numeric(upper)
-          )
-
-        if (nrow(df_final) != 0) {
-          results_list[[i]] <- df_final
-          success_count <- success_count + 1
-
-          if (verbose) {
-            log_message(paste0("Processed ", param_combinations_with_code$country[i],
-                               " ", param_combinations_with_code$periods[i],
-                               " ", param_combinations_with_code$age_groups[i],
-                               " ", param_combinations_with_code$sex_options[i],
-                               " ", param_combinations_with_code$code_indicator[i],
-                               "."))
-          }
-        } else {
-          log_message(paste0("Failed ", param_combinations_with_code$country[i],
-                             " ", param_combinations_with_code$periods[i],
+        if (verbose) {
+          log_message(paste0("Processed ",
+                             param_combinations_with_code$periods[i],
                              " ", param_combinations_with_code$age_groups[i],
                              " ", param_combinations_with_code$sex_options[i],
                              " ", param_combinations_with_code$code_indicator[i],
                              "."))
-          fail_count <- fail_count + 1
-          fail_record <- param_combinations_with_code[i, ] %>%
-            select(country, periods, age_groups, sex_options, code_indicator, url)
-          fail_list[[i]] <- fail_record
-          next
         }
       } else {
-        log_message(paste("Failed to fetch data for URL:", url,
-                          "with status code:", httr::status_code(response)))
+        log_message(paste0("Failed ",
+                           param_combinations_with_code$periods[i],
+                           " ", param_combinations_with_code$age_groups[i],
+                           " ", param_combinations_with_code$sex_options[i],
+                           " ", param_combinations_with_code$code_indicator[i],
+                           "."))
         fail_count <- fail_count + 1
         fail_record <- param_combinations_with_code[i, ] %>%
-          select(country, periods, age_groups, sex_options, code_indicator, url)
+          select(periods, age_groups, sex_options, code_indicator, url)
         fail_list[[i]] <- fail_record
         next
       }
-
-      # Sleep if wait is specified
-      if (wait > 0) {
-        Sys.sleep(wait)
-      }
+    } else {
+      log_message(paste("Failed to fetch data for URL:", url,
+                        "with status code:", httr::status_code(response)))
+      fail_count <- fail_count + 1
+      fail_record <- param_combinations_with_code[i, ] %>%
+        select(periods, age_groups, sex_options, code_indicator, url)
+      fail_list[[i]] <- fail_record
+      next
     }
-  })
+
+    # Sleep if wait is specified
+    if (wait > 0) {
+      Sys.sleep(wait)
+    }
+  }
 
   if (verbose) {
     log_message("Combining all queries' results...")
@@ -204,8 +203,13 @@ pull_naomi <- function(countries = "all", indicators = "all",
 
   if (fail_count == 0) {
     if (csv) {
-      write_csv(combined_results, "naomi_results.csv")
-      log_message("Results downloaded to current directory as naomi_results.csv")
+      name <- paste0(csv_name, ".csv")
+      tryCatch({
+        write.csv(combined_results, name)
+        message(sprintf("Results downloaded to current directory as %s", name))
+      }, error = function(e) {
+        message(sprintf("Failed to write CSV file: %s", e$message))
+      })
     }
     return(combined_results)
   } else {
