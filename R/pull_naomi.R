@@ -204,17 +204,25 @@ pull_naomi <- function(countries = "all", indicators = "all",
 
   if (fail_count == 0) {
     if (csv) {
-      write_csv(combined_results, "naomi_results.csv")
-      log_message("Results downloaded to current directory as naomi_results.csv")
+      name <- paste0(csv_name, ".csv")
+      tryCatch({
+        combined_results <- combined_results %>% dplyr::mutate(across(where(is.list), as.character))
+        write.csv(combined_results, name, row.names = FALSE)
+        message(sprintf("Results downloaded to current directory as %s", name))
+      }, error = function(e) {
+        message(sprintf("Failed to write CSV file: %s", e$message))
+      })
     }
     return(combined_results)
-  } else {
+  }
+ else {
     failed_requests_df <- bind_rows(fail_list)
     cat("Failures in query. To see successful results: $success_data. To see failures, view $fail_data")
 
     if (csv) {
-      write_csv(combined_results, "naomi_results.csv")
-      log_message("Successful results downloaded to current directory as naomi_results.csv")
+      name <- paste0(csv_name, "_success.csv")
+      write_csv(combined_results, name)
+      log_message(sprinf("Successful results ONLY downloaded to current directory as %s", name))
     }
 
     return(list(success_data = combined_results, fail_data = failed_requests_df))
