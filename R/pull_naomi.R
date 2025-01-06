@@ -123,7 +123,7 @@ pull_naomi <- function(countries = "all", indicators = "all",
           mutate(
             country = param_combinations_with_code$country[i],
             period = param_combinations_with_code$periods[i],
-            period_year_quarter = param_combinations_with_code$code_period[i],
+            #period_year_quarter = param_combinations_with_code$code_period[i],
             age_group = param_combinations_with_code$age_groups[i],
             sex = param_combinations_with_code$sex_options[i],
             indicator = param_combinations_with_code$code_indicator[i],
