@@ -204,9 +204,8 @@ pull_naomi <- function(countries = "all", indicators = "all",
 
   if (fail_count == 0) {
     if (csv) {
-      name <- paste0(csv_name, "_success.csv")
-      write_csv(combined_results, name)
-      log_message(sprinf("Successful results ONLY downloaded to current directory as %s", name))
+      write_csv(combined_results, "naomi_results.csv")
+      log_message("Results downloaded to current directory as naomi_results.csv")
     }
     return(combined_results)
   }
@@ -215,9 +214,8 @@ pull_naomi <- function(countries = "all", indicators = "all",
     cat("Failures in query. To see successful results: $success_data. To see failures, view $fail_data")
 
     if (csv) {
-      name <- paste0(csv_name, "_success.csv")
-      write_csv(combined_results, name)
-      log_message(sprinf("Successful results ONLY downloaded to current directory as %s", name))
+      write_csv(combined_results, "naomi_results.csv")
+      log_message("Results downloaded to current directory as naomi_results.csv")
     }
 
     return(list(success_data = combined_results, fail_data = failed_requests_df))
