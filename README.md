@@ -35,11 +35,11 @@ The main function to retrieve data is `pull_naomi`. Users can customize the data
 ```R
 pull_naomi(
   countries = "all",   # Character vector, "all", or "dreams"
-  indicators = "all",  # Character vector or "all"
+  indicators = "all",  # Character vector, "all" or "no anc"
   age_groups = "standard", # Character vector or "standard"
   sex_options = "all", # Character vector or "all"
   periods = "recent",  # Character vector or "recent"
-  max_level = "none",  # Integer or "none"
+  max_level = 5,       # Integer
   verbose = FALSE,     # Logical
   csv = FALSE,         # Logical
   wait = 0             # Numeric
@@ -49,30 +49,39 @@ pull_naomi(
 ### Parameters
 
 - **`countries`**: A character vector specifying the countries to include. Options are `"all"` or `"dreams"`.
-- **`indicators`**: A character vector for the indicators of interest. Options include `"all"` or a specific list.
+- **`indicators`**: A character vector for the indicators of interest. Options include `"all"`, `"no anc"`, or a specific list.
 - **`age_groups`**: A character vector for the desired age groups. Can be set to `"standard"` or a specific list.
 - **`sex_options`**: A character vector specifying the sex options. Defaults to `"all"`.
 - **`periods`**: A character vector for the periods of interest. Defaults to `"recent"`.
 - **`max_level`**: An integer representing the maximum area level to retrieve data for.
 - **`verbose`**: A logical value that controls whether progress messages are printed during data retrieval.
-- **`csv_`**: A logical value that controls whether the results will be saved as a CSV or not. CSVs save in the current working directory.
+- **`csv`**: A logical value that controls whether the results will be saved as a CSV or not. CSVs save in the current working directory.
 - **`wait`**: An optional float parameter that introduces a delay (in seconds) between API requests. This can help reduce errors if too many requests are sent in a short period. Set to `0` for no delay, or to a positive value to wait before each request.
 
 #### Parameter Input Options
+
+Input any of the possible values into a character vector (ensure each value is enclosed in quotes). View the full list of parameters here: [all_parameters_summary.csv](https://github.com/USAID-OHA-SI/visiblespectrum/blob/main/inst/extdata/all_parameters_summary.csv).
+
+For a more robust explanation of input parameters see [input_tables.html](https://github.com/USAID-OHA-SI/visiblespectrum/blob/main/doc/input_tables.html)
+
+You can also use the predefined input options below:
 
 | Parameter    | Option        | Description                                                                                                               |
 |--------------|---------------|---------------------------------------------------------------------------------------------------------------------------|
 | `countries`  | `"all"`      | `c("Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Chad", "Congo", "Cote D'ivoire", "Democratic Republic of the Congo", "Eritrea", "Eswatini", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea Bissau", "Haiti", "Kenya", "Lesotho", "Liberia", "Malawi", "Mali", "Mozambique", "Namibia", "Niger", "Nigeria", "Rwanda", "Sierra Leone", "South Africa", "Togo", "Uganda", "United Republic of Tanzania", "Zambia", "Zimbabwe")` |
 | `countries`  | `"dreams"`   | `c("Botswana", "Cote D'ivoire", "Haiti", "Kenya", "Lesotho", "Malawi", "Mozambique", "Namibia", "Rwanda", "South Africa", "South Sudan", "Tanzania", "Uganda", "Zambia", "Zimbabwe")` |
-| `indicators` | `all`        | `c("Population", "HIV prevalence", "PLHIV", "ART coverage", "ART number (residents)", "ART number (attending)", "PLHIV not on ART", "Proportion PLHIV aware", "Number PLHIV unaware", "Number PLHIV aware", "PLHIV (ART catchment)", "Untreated PLHIV (ART catchment)", "Number aware PLHIV (ART catchment)", "Number unaware PLHIV (ART catchment)", "HIV incidence per 1000", "New infections", "ANC HIV prevalence", "ANC prior ART coverage", "ANC clients", "HIV positive ANC attendees", "ANC attendees already on ART", "ART initiations at ANC", "ANC known positive", "ANC tested positive", "ANC tested negative")` |
-| `age_groups` | `standard`   | `c("<1", "1-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50+")`                      |
+| `indicators` | `"all"`        | `c("Population", "HIV prevalence", "PLHIV", "ART coverage", "ART number (residents)", "ART number (attending)", "PLHIV not on ART", "Proportion PLHIV aware", "Number PLHIV unaware", "Number PLHIV aware", "PLHIV (ART catchment)", "Untreated PLHIV (ART catchment)", "Number aware PLHIV (ART catchment)", "Number unaware PLHIV (ART catchment)", "HIV incidence per 1000", "New infections", "ANC HIV prevalence", "ANC prior ART coverage", "ANC clients", "HIV positive ANC attendees", "ANC attendees already on ART", "ART initiations at ANC", "ANC known positive", "ANC tested positive", "ANC tested negative")` |
+| `indicators` | `"no anc"`        | `c("Population", "HIV prevalence", "PLHIV", "ART coverage", "ART number (residents)", "ART number (attending)", "PLHIV not on ART", "Proportion PLHIV aware", "Number PLHIV unaware", "Number PLHIV aware", "PLHIV (ART catchment)", "Untreated PLHIV (ART catchment)", "Number aware PLHIV (ART catchment)", "Number unaware PLHIV (ART catchment)", "HIV incidence per 1000", "New infections"` |
+| `age_groups` | `"standard"`   | `c("<1", "1-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50+")`                      |
 | `sex_options`| `"all"`      | `c("Male", "Female", "Both")`                                                                                          |
 | `periods`    | `"recent"`   | Most recent period. Currently set to `December 2023`.                                                                     |
-| `max_level`  | `"none"`     | No max level is set. Highest area level depth will be used.                                                              |
+| `max_level`  | `5`     | No max level is set. Highest area level depth will be used.                                                              |
 
 ### Example Queries
 
 ```R
+library(visiblespectrum)
+
 # Pull defaults
 defaults_query <- pull_naomi()
 View(defaults_query)
@@ -107,6 +116,7 @@ hiv_prev_country_level_query <- pull_naomi(
   max_level = 0
 )
 View(hiv_prev_country_level_query)
+
 ```
 
 ---
@@ -114,9 +124,9 @@ View(hiv_prev_country_level_query)
 ### In Development
 
 #### Higher Priority
-- Improve error handling for expected data gaps, such as:
+- Improve graceful error handling for expected data gaps, such as:
   - **Namibia**: Missing PEDS (0-14) data.
-  - Some countries missing data for **`ANC tested negative`** and **`ANC tested positive`**.
+  - Some countries missing data for ANC indicators including **`ANC tested negative`** and **`ANC tested positive`**.
 - Automatically select and use the most recent available period for all countries.
   - Dig into periods issue and handle Mozambique (see notes)
 - Introduce more robust testing procedures.

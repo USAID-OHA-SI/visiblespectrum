@@ -34,6 +34,7 @@ pull_naomi <- function(countries = "all", indicators = "all",
                        age_groups = "standard", sex_options = "all",
                        periods = "recent", max_level = 5,
                        verbose = FALSE, csv = FALSE, csv_name = "naomi_results", wait = 0) {
+  # Load data
 
   load(system.file("data", "all_countries.RData", package = "visiblespectrum"))
   load(system.file("data", "all_indicators.RData", package = "visiblespectrum"))
