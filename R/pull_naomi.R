@@ -204,14 +204,9 @@ pull_naomi <- function(countries = "all", indicators = "all",
 
   if (fail_count == 0) {
     if (csv) {
-      name <- paste0(csv_name, ".csv")
-      tryCatch({
-        combined_results <- combined_results %>% dplyr::mutate(across(where(is.list), as.character))
-        write.csv(combined_results, name, row.names = FALSE)
-        message(sprintf("Results downloaded to current directory as %s", name))
-      }, error = function(e) {
-        message(sprintf("Failed to write CSV file: %s", e$message))
-      })
+      name <- paste0(csv_name, "_success.csv")
+      write_csv(combined_results, name)
+      log_message(sprinf("Successful results ONLY downloaded to current directory as %s", name))
     }
     return(combined_results)
   }
